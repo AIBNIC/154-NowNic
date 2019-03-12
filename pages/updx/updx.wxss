@@ -1,0 +1,40 @@
+/* pages/updx/updx.wxss */
+page{
+  height: 100%;
+}
+.content{
+  width: 100%;
+  height: 100%;
+  background: #f8f8f9;
+}
+/* 清除浮动 */
+.group_a::after,.btn::after{
+  display: block;
+  height: 0;
+  clear:both;
+  content:'';
+  
+}
+.group{
+  background: #fff;
+}
+.btn{
+  width: 90%;
+  margin: 50rpx auto;
+}
+.btn_b{
+  display: block;
+  width: 48%;
+  float: left;
+}
+.dark{
+  background: #669;
+  color: #fff;
+  margin: 10px 0;
+  border:1px solid transparent;
+  border-radius:4px;
+  /* vertical-align:middle;
+  text-align:center;
+  text-overflow:ellipsis; */
+  font-size:16px;
+}

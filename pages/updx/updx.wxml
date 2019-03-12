@@ -1,0 +1,73 @@
+<!--pages/updx/updx.wxml-->
+<!-- <view class='content'>
+  <h1>电信故障上报</h1>
+  <view class='view_a'>
+    <i-panel title="基础用法">
+      <i-input value="{{ user.user_name }}" title="用户" bindchange="name" autofocus placeholder="名字" />
+      <i-input value="{{ user.user_num }}" type="number" title="学号" placeholder="请输入学号" />
+      <i-input value="{{ user.user_room }}" title="宿舍" autofocus placeholder="请输入宿舍" />
+      <i-input value="{{ user.error }}" title="故障类型" autofocus placeholder="请输入故障类型" />
+      <i-input value="{{ user.error1 }}" title="故障类型" autofocus placeholder="请输入故障描述" />
+      <i-input value="{{ user.telphone }}" type="number" title="手机号" autofocus placeholder="请输入手机号" />
+      <i-input value="{{ user.idcard }}" type="number" title="身份证" placeholder="请输入身份证" />
+      <view class='group'>
+        <i-panel title="group-水果" class="group_a">
+            <i-radio-group current="{{current}}" bindchange="handleFruitChange">
+            <i-radio wx:for="{{fruit}}" position="{{position}}" wx:key="{{item.id}}" value="{{item.name}}">
+          </i-radio>
+        </i-radio-group>
+       </i-panel>
+      </view>
+      
+     
+  </i-panel>
+    <view class='view_a btn'>
+      <i-button bind:click="reset" type="error" shape="circle" class='btn_b'>重置</i-button>
+      <i-button bind:click="tijiao" type="primary" shape="circle" class='btn_b'>提交</i-button>
+    </view>
+  </view>
+  <i-load-more tip="我是有底线的" loading="{{ false }}" />
+</view> -->
+<form bind:submit="tijiao" report-submit="true">
+<view class="page">
+<wux-toptips id="wux-toptips" />
+<!-- <i-toast id="toast" /> -->
+    <view class="page__bd">
+        <wux-cell-group title="上报电信故障">
+            <wux-cell hover-class="none">
+                <wux-input label="用户" value="{{  user.name }}" controlled placeholder="名字"   bindchange='name' />
+            </wux-cell>
+            <wux-cell hover-class="none">
+                <wux-input label="学号" value="{{  user.num }}" bind:focus="onNum" type="number" maxlength='11' controlled placeholder="请输入学号" bindchange='stuNumber'/>
+            </wux-cell>
+            <wux-cell hover-class="none">
+                <wux-input label="宿舍" value="{{  user.room }}" controlled placeholder="请输入宿舍" bindchange='room'/>
+            </wux-cell>
+            <wux-cell hover-class="none">
+                <wux-input label="故障类型" value="{{  user.error }}" controlled placeholder="请输入故障类型" bindchange='error'/>
+            </wux-cell>
+            <wux-cell hover-class="none">
+                <wux-input label="故障描述" value="{{  user.error1 }}" controlled placeholder="请输入故障描述" bindchange='error1'/>
+            </wux-cell>
+             <wux-cell hover-class="none">
+                <wux-input label="电信账号" value="{{ user.telphone }}" controlled error="{{ error }}" type="number" bind:change="onChange" bind:focus="onFocus" bind:blur="onBlur" bind:confirm="onConfirm" bind:clear="onClear" bind:error="onError" placeholder="请输入手机号" maxlength='11'/>
+             </wux-cell>
+             <wux-cell hover-class="none">
+                <wux-input label="身份证" value="{{  user.idcard }}" controlled placeholder="请输入身份证" bindchange='idcard'  maxlength='18' />
+            </wux-cell>
+        </wux-cell-group>
+    </view>
+    <view>
+        <wux-radio-group name="a" value="{{ state }}" title="电信套餐" bind:change="onChange1">
+                    <wux-radio color="royal" title="电信8M" value="8M" />
+                    <wux-radio color="dark" title="电信2M" value="2M" />
+        </wux-radio-group>
+    </view>
+    <view class='page__bd page__bd_spacing'>
+      <wux-button block type="positive" bindtap='reset'>重置</wux-button>
+      <button formType="submit" class='dark'>提交</button>
+      <!-- <wux-button block type="dark" formType="submit">提交</wux-button>  -->
+    </view>
+    
+</view>
+</form>

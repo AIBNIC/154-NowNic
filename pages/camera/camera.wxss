@@ -1,0 +1,28 @@
+/* pages/camera/camera.wxss */
+image{
+  width: 100%;
+}
+#view-b{
+  width: 88%;
+  margin:  0 auto;
+  /* border: 1px solid red; */
+  /* clean: both; */
+}
+#in_input{
+  display: inline-block;
+  width: 50%;
+  /* float: left; */
+  border: 1px solid #666666;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 18px;
+  /* margin-left: 1px; */
+  /* font-size: 20px; */
+}
+#tijiao{
+  display: inline-block;
+  height: 45px;
+  width: 36%;
+  margin: 20px 0 2px 20px ;
+  /* float: left; */
+}

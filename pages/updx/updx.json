@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "wux-button": "../../dist1/button/index",
+    "wux-toptips": "../../dist1/toptips/index",
+    "wux-cell-group": "../../dist1/cell-group/index",
+    "wux-cell": "../../dist1/cell/index",
+    "wux-input": "../../dist1/input/index",
+    "wux-icon": "../../dist1/icon/index",
+    "wux-radio-group": "../../dist1/radio-group/index",
+    "wux-radio": "../../dist1/radio/index"
+  }
+  
+}

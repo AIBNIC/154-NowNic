@@ -1,0 +1,72 @@
+<!--pages/worktable/worktable.wxml-->
+<view class='container'>
+  <view class="page">
+    <view style='font-size:16pt;text-align:center;margin:10px auto;'>通讯录</view>
+    <view class="page__bd" >
+        <view bindtap='' data-tel='' class='telphone' style='border-right:1px solid #ddd;'>13栋</view>
+        <view bindtap='tel' data-tel='18127309306' class='telphone'>谭荣健</view>
+        <view bindtap='tel' data-tel='14718599956' class='telphone'>刘容茂</view>
+        <view bindtap='tel' data-tel='15219919695' class='telphone'>郑梓勤</view>
+        <view bindtap='tel' data-tel='18300119711' class='telphone'>廖素丽</view>
+    </view>
+     <view class="page__bd" >
+        <view bindtap='' data-tel='' class='telphone' style='border-right:1px solid #ddd;'>14栋</view>
+        <view bindtap='tel' data-tel='15919925499' class='telphone'>谢啸清</view>
+        <view bindtap='tel' data-tel='13631033474' class='telphone'>陈艺婷</view>
+        <view bindtap='tel' data-tel='15119724512' class='telphone'>张飞</view>
+        <view bindtap='tel' data-tel='15013483993' class='telphone'>梁志胜</view>
+    </view>
+     <view class="page__bd" >
+        <view bindtap='' data-tel='' class='telphone' style='border-right:1px solid #ddd;'>1819</view>
+        <view bindtap='tel' data-tel='15916620882' class='telphone'>谢佳荣</view>
+        <view bindtap='tel' data-tel='13553752207' class='telphone'>林洁</view>
+        <view bindtap='tel' data-tel='15019867310' class='telphone'>梁伟历</view>
+        <view bindtap='tel' data-tel='13570117257' class='telphone'>吴佩婷</view>
+    </view>
+     <view class="page__bd" >
+        <view bindtap='' data-tel='' class='telphone' style='border-right:1px solid #ddd;'>2021</view>
+        <view bindtap='tel' data-tel='13126005183' class='telphone'>梁嵘林</view>
+        <view bindtap='tel' data-tel='13128448699' class='telphone'>吴剑萍</view>
+        <view bindtap='tel' data-tel='18142879538' class='telphone'>张梓涛</view>
+        <view bindtap='tel' data-tel='13600090306' class='telphone'>梁慧珊</view>
+    </view>
+     <view class="page__bd" >
+        <view bindtap='' data-tel='' class='telphone' style='border-right:1px solid #ddd;'>22栋</view>
+        <view bindtap='tel' data-tel='14718396034' class='telphone'>陈锦婷</view>
+        <view bindtap='tel' data-tel='13046265466' class='telphone'>李鸿泽</view>
+        <view bindtap='tel' data-tel='18344129425' class='telphone'>张烯</view>
+        <view bindtap='' data-tel='' class='telphone'></view>
+    </view>
+     <view class="page__bd" >
+        <view bindtap='' data-tel='' class='telphone' style='border-right:1px solid #ddd;'>23栋</view>
+        <view bindtap='tel' data-tel='13570141601' class='telphone'>张展源</view>
+        <view bindtap='tel' data-tel='13602706585' class='telphone'>李敏怡</view>
+        <view bindtap='tel' data-tel='13652603296' class='telphone'>方宏毅</view>
+        <view bindtap='' data-tel='' class='telphone'></view>
+    </view>
+     <view class="page__bd" >
+        <view bindtap='' data-tel='' class='telphone' style='border-right:1px solid #ddd;'>24栋</view>
+        <view bindtap='tel' data-tel='13076502636' class='telphone'>陈剑鸿</view>
+        <view bindtap='tel' data-tel='13119678150' class='telphone'>李梓钊</view>
+        <view bindtap='tel' data-tel='13160998045' class='telphone'>梅嘉欣</view>
+        <view bindtap='tel' data-tel='15875482968' class='telphone'>陈远</view>
+    </view>
+     <view class="page__bd" >
+        <view bindtap='' data-tel='' class='telphone' style='border-right:1px solid #ddd;'>2526</view>
+        <view bindtap='tel' data-tel='13246000046' class='telphone'>张水生</view>
+        <view bindtap='tel' data-tel='13539264111' class='telphone'>罗铎</view>
+        <view bindtap='tel' data-tel='18898501720' class='telphone'>杨小莹</view>
+        <view bindtap='tel' data-tel='13682766825' class='telphone'>吴乐琴</view>
+    </view>
+    <view class="page__bd" >
+        <view bindtap='' data-tel='' class='telphone' style='border-right:1px solid #ddd;'>27栋</view>
+        <view bindtap='tel' data-tel='18144876808' class='telphone'>欧阳威</view>
+        <view bindtap='tel' data-tel='17666109164' class='telphone'>林泽峰</view>
+        <view bindtap='tel' data-tel='15768888259' class='telphone'>李彩凤</view>
+        <view bindtap='tel' data-tel='13415165163' class='telphone'>林杰</view>
+    </view>
+  </view>
+</view>
+<view>
+  <image src='https://nic.fhyiii.cn/table.jpg' class='table_img'></image>
+</view> 

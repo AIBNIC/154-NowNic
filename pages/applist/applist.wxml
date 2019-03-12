@@ -1,0 +1,60 @@
+<!--pages/applist/applist.wxml-->
+<!-- <wux-notice-bar loop speed="100" wux-class="notice-bar"   content=" {{ tip }} " icon="https://nic.fhyiii.cn/dog.png"  /> -->
+<i-grid>
+    <i-grid-item>
+        <i-grid-icon bindtap="searchStu" >
+            <image src="../../images/loupe.png" />
+        </i-grid-icon>
+        <i-grid-label>查信息</i-grid-label>
+    </i-grid-item>
+    <i-grid-item bindtap="camera">
+        <i-grid-icon>
+            <image src="../../images/ruijie.png" />
+        </i-grid-icon>
+        <i-grid-label>上传证件照</i-grid-label>
+    </i-grid-item>
+    <i-grid-item bindtap="ludan">
+        <i-grid-icon>
+            <image src="../../images/ludan.png" />
+        </i-grid-icon>
+        <i-grid-label>开网录单</i-grid-label>
+    </i-grid-item>
+    <!-- <i-grid-item>Grid</i-grid-item>
+    <i-grid-item>Grid</i-grid-item> -->
+</i-grid>
+<i-grid>
+    <i-grid-item bindtap="searchdx">
+        <i-grid-icon>
+            <image src="../../images/dx.png" />
+        </i-grid-icon>
+        <i-grid-label>电信查询</i-grid-label>
+    </i-grid-item>
+    <i-grid-item bindtap="updx">
+        <i-grid-icon>
+            <image src="../../images/searching.png" />
+        </i-grid-icon>
+        <i-grid-label>上报电信</i-grid-label>
+    </i-grid-item>
+    <!-- <i-grid-item>
+        <i-grid-icon>
+            <image src="../../images/ludan.png" />
+        </i-grid-icon>
+        <i-grid-label>开网录单</i-grid-label>
+    </i-grid-item> -->
+    <!-- <i-grid-item>Grid</i-grid-item>
+    <i-grid-item>Grid</i-grid-item> -->
+</i-grid>
+   <!-- <view class='btnGroup'>
+    <view class='item'>
+      <image class='icon' src='../../images/home.png'></image>
+      电信查询
+    </view>
+    <view class='item'>
+    <image class='icon' src='../../images/home.png'></image>
+      锐捷查询
+    </view>
+    <view class='item end'>
+    <image class='icon' src='../../images/home.png'></image>
+      电信查询
+    </view>
+  </view> -->

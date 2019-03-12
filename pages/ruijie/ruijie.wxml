@@ -1,0 +1,48 @@
+<view class='content'>
+  <view class='h1'>网络维护IP</view>
+  <view class='page_row'>  
+    <view class="search">  
+      <view class="df search_arr">  
+        <icon class="searchcion" size='20' type='search'></icon>  
+        <input class="" value='{{search_info}}' bindinput="bindChange" placeholder="学号/姓名/mac/ip" />  
+      </view>  
+    </view>  
+    <button size='' class='search-btn' bindtap='search_ruijie' type='' >搜索</button>  
+  </view>  
+<scroll-view class='info' scroll-y scroll-with-animation>
+  <view><text class='left left1'>姓名</text><text class='right'>{{USERNAME}}</text></view>
+  <view><text class='left left2'>学号</text><text class='right'>{{USERID}}</text></view>
+  <view><text class='left left1'>MAC</text><text class='right'>{{USERMAC}}</text></view>
+  <view><text class='left left2'>当前IP</text><text class='right'>{{USERIP}}</text></view>
+  <view><text class='left left2'>设备IP</text><text class='right'>{{NASIP}}</text></view>
+  <view><text class='left left2'>设备端口</text><text class='right'>{{NASPORT}}</text></view>
+  <view><text class='left left2'>网关IP</text><text class='right'>{{GATEWAY}}</text></view>
+  <view><text class='left left2'>登陆时间</text><text class='right'>{{LOGINTIME}}</text></view>
+  <view><text class='left left2'>宿舍号</text><text class='right'>{{stu_room}}</text></view>
+  <view><text class='left left2'>开通时间</text><text class='right'>{{stu_start_time}}</text></view>
+  <view><text class='left left2'>到期时间</text><text class='right'>{{stu_end_time}}</text></view>
+  <view><text class='left left2' style='width: 40px;'>密钥</text><text class='right' style='margin-left: 0;'>{{enkey}}</text></view>
+</scroll-view>
+<!-- <view class='footer'>
+  <button class='btn' hover-class="btn_active" bindtap='remove_ip' >清除IP</button>
+  <button class='btn' hover-class="btn_active" bindtap='remove_lou'>清除楼层</button>
+  <button class='btn' hover-class="btn_active" bindtap='remove_user'>删除用户</button>
+</view> -->
+  <view class="section">
+    <view class="section_title" hover-class='section-act' bindtap='changeDate'>修改日期</view>
+    <picker mode="date" value="{{date}}" start="2017-09-01" end="2022-09-01" bindchange="bindDateChange">
+      <block>
+        <label>当前选择: </label>
+        <view class="picker">
+          <input type="" class='picker_input' value='{{date}}'></input>
+        </view>
+      </block>
+    </picker>
+    <block>
+      <label>修改人: </label>
+      <view class="picker" >
+        <input class='picker_input' value='{{date_man}}' bindinput="man_input" disabled='disabled'></input>
+      </view>
+    </block>
+  </view>
+</view>

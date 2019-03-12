@@ -1,0 +1,6 @@
+<!--pages/adduserinfo/adduserinfo.wxml-->
+<button class='btn'  bindtap="FingerPrint">录入指纹</button>
+
+
+
+ 

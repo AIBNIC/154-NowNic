@@ -1,0 +1,171 @@
+.content{
+  font-family: 'Microsoft YaHei','Simsun';
+  font-weight: lighter;
+}
+
+.h1{
+  font-size: 27px;
+  height: 10px;
+  color: #000000;
+  display: block;
+  flex-direction: row;
+  justify-content:center;
+  /* margin: 10px 0 10px 0; */
+}
+
+.search{
+  width: 78%;
+}
+.search-btn{
+  /* font-size: 100%; */
+  font-family: 'Microsoft YaHei','Simsun';
+  font-weight: lighter;
+  outline: none;
+  border-radius: 13rpx;
+  font-size:40rpx;
+  background: #fff;
+  
+}
+.search_arr {
+  border: 1px solid #d0d0d0;
+  border-radius: 10rpx;
+  margin-left: 20rpx; 
+  padding: 8px;
+}
+.search_arr input{
+  margin-left: 60rpx;
+  height: 60rpx;
+  border-radius: 5px;
+}
+.bc_text {
+  line-height: 68rpx;
+  height: 68rpx;
+  margin-top: 34rpx;
+}
+
+.sousuo {
+  margin-left: 15rpx;
+  width: 15%;
+  line-height: 150%;
+  text-align: center;
+  border: 1px solid #d0d0d0;
+  border-radius: 10rpx;
+}
+.page_row{
+  display: flex;
+  flex-direction: row;
+}
+.page_row botton{
+  font-size: 100%;
+  color: #000;
+}
+.searchcion {
+  margin: 10rpx 10rpx 10rpx 10rpx;
+  position: absolute;
+  left:25rpx;
+  z-index: 2;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}
+.info
+{
+  /* margin-top: 30rpx; */
+  background-color: #fff;
+  /* height: 600rpx; */
+}
+.info_a{
+  /* height: 480rpx; */
+}
+.info view,.info_a view{
+  margin: 3px 10px;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px dashed #ddd;
+}
+.info_a view{
+  /* margin: 10px 10px 0 10px; */
+}
+.info text{
+   padding: 10px 0;
+   padding-left: 5px;
+}
+.left{
+  text-align: center;
+  width: 80px;
+  border-radius: 20px;
+  padding: 5px;
+}
+.left1
+{
+  /* background-color: #E69F6C; */
+}
+.left2
+{ 
+  /* background-color: #0D7EAD; */
+}
+.right
+{
+  margin-left: 20px;
+}
+.footer{
+  display: flex;
+  flex-direction: row;
+}
+.btn{
+  /* display: inline-block; */
+  margin-top: 10px;
+  /* width: 150px; */
+  font-size: 20px;
+  color: #fff;
+  background-color: #03a9f4;
+  border-color: #039be5;
+}
+.btn_active{
+  background-color: #039be5;
+}
+.section{
+  width: 90%;
+  margin: 20px auto;
+  font-size: 35rpx;
+  text-align: center;
+}
+
+.section-act{
+  text-decoration:underline;
+  text-decoration-color:red;
+}
+.section label{
+  display: inline-block;
+  width: 30%;
+}
+.picker{
+  display: inline-block;
+  width: 60%;
+  border-bottom: 1px solid #000;
+}
+.picker_input{
+  text-align: center;
+  padding-top: 20px;
+}
+.time_btn{
+  width:30%;
+  font-size:34rpx;
+  color:#000;
+  background:#fff;
+  align-items:center;
+  justify-content:center;
+  vertical-align:middle;
+  display:inline-block;
+  padding: 10rpx;
+}
+.time_btn_hover{
+  background:#03a9f4;
+  color:#fff;
+}
+
+.btn_fault{
+    width: 88%;
+    margin: 0 auto;
+    /* margin: 10px auto 10px auto; */
+}

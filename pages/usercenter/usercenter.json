@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "i-swipeout": "../../dist/swipeout/index"
+  },
+  "navigationBarTitleText": "个人信息"
+}

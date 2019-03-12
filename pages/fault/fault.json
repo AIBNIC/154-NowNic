@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "wux-floating-button": "../../dist1/floating-button/index",
+    "wux-refresher": "../../dist1/refresher/index"
+  }
+}

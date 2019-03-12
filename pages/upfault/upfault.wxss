@@ -1,0 +1,7 @@
+/* pages/upfault/upfault.wxss */
+.btn{
+  width: 99%;
+  margin: 0 auto;
+  margin-top: 20px;
+  
+}

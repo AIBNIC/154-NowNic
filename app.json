@@ -1,0 +1,46 @@
+{
+  "pages":[
+    "pages/fault/fault",
+    "pages/usercenter/usercenter",
+    "pages/login/login",
+    "pages/searchdx/searchdx",
+    "pages/ruijie/ruijie",
+    "pages/searchStu/searchStu",
+    "pages/ludan/ludan",
+    "pages/updx/updx",
+    "pages/upfault/upfault",
+    "pages/applist/applist",
+    "pages/worktable/worktable",
+    "pages/faultInfo/faultInfo",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "NIC",
+    "navigationBarTextStyle":"white"
+  },
+  "networkTimeout":{
+    "request": 20000, 
+    "connectSocket": 20000,
+    "downloadFile": 20000
+  },
+  "tabBar": {
+    "selectedColor": "#666",
+    "list": [
+      {
+        "pagePath": "pages/fault/fault",
+        "text": "故障",
+        "iconPath": "images/home_active.png",
+        "selectedIconPath": "images/home.png"
+      },
+      {
+        "pagePath": "pages/usercenter/usercenter",
+        "text": "应用",
+        "iconPath": "images/my-active.png",
+        "selectedIconPath": "images/my.png"
+      }
+    ]
+  }
+}
+

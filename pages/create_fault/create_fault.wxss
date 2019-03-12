@@ -1,0 +1,59 @@
+.task-card{
+    background-color: white;
+    width: 80%;
+    margin: 50rpx auto;
+    height: auto;
+    padding: 25rpx 30rpx 30rpx 30rpx;
+    border-radius: 20rpx;
+    display: flex;
+    flex-direction: column;
+    font-size: 35rpx;
+}
+.content{
+    display: flex;
+    flex-direction: row;
+    padding: 10rpx;
+    height: 80rpx;
+    justify-content:space-between;
+}
+.laber{
+    line-height: 80rpx;
+    width: auto;
+}
+.value{
+    line-height: 80rpx;
+    width: auto;
+}
+.input{
+    width: 50%;
+    padding: 20rpx 0;
+    text-align: right;
+}
+.create{
+  margin-top: 30rpx;
+}
+
+.text-box{
+    width:100%; 
+    padding: 10rpx;
+    position: relative;
+    min-height:80rpx;
+    margin-top: 17rpx;
+}
+.text-box text{
+   display:block;
+   padding: 10rpx;
+   visibility:hidden;
+   word-break:break-all;
+   word-wrap:break-word;
+}
+.text-box .weui-textarea{
+    height:100%;
+    position: absolute;
+    left:0;
+    top: 0;
+    overflow-y:hidden;
+    padding: 10rpx;
+    word-break:break-all;
+    word-wrap:break-word;
+}

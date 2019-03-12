@@ -1,0 +1,13 @@
+<!--pages/camera/camera.wxml-->
+<view>
+  <!-- <button bindtap='getLocalImage'>上次证件照</button> -->
+  <button style="margin:30rpx;" bindtap="chooseimage">正面照片(注意横拍)</button>
+  <image src='{{imageurl}}' ></image>
+  <button style="margin:30rpx;" bindtap="chooseimage1">反面照片(注意横拍)</button>
+  <image src='{{imageurl1}}' ></image>
+  <view id='view-b'>
+      <input type='text' placeholder='姓名' id='in_input' bindinput='in_input' value='{{user_name}}'></input>
+      <button  bindtap="upimage" id='tijiao'>上传图片</button>
+  </view>
+  
+</view>

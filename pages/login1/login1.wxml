@@ -1,0 +1,16 @@
+<view class="container">
+  <!-- logo -->
+  <view>
+    <text class="login-title">AIB-NIC</text>
+    <image class="login-logo" src="../../images/ruijie.png"></image>
+  </view>
+  <!-- 输入框 -->
+  <view class='view_input'>
+    <input class="input" type="number" maxlength="11" bindblur="userID" bindconfirm="userID" placeholder="帐号"></input>
+    <input class="input" type="text" password="true" placeholder="密码" bindblur="userPass" bindconfirm="userPass"></input>
+  </view>
+  <!-- 登录 -->
+  <view class="btns">
+    <button class="btn-login" bindtap="checkUser">登录</button>
+  </view>
+</view>

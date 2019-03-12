@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "上报学生故障",
+  "usingComponents": {
+    "wux-cell-group": "../../dist1/cell-group/index",
+    "wux-cell": "../../dist1/cell/index",
+    "wux-textarea": "../../dist1/textarea/index",
+    "wux-button": "../../dist1/button/index",
+    "wux-toast": "../../dist1/toast/index"
+  }
+}

@@ -1,0 +1,15 @@
+<!--pages/upfault/upfault.wxml-->
+<wux-toast id="wux-toast" />
+<wux-cell-group title="学生信息">
+    <wux-cell hover-class="none">
+        <wux-textarea disabled='disabled'>{{stu_name}} {{stu_number}} {{stu_room}}</wux-textarea>
+    </wux-cell>
+    <wux-cell-group title="故障描述">
+    <wux-cell hover-class="none">
+        <wux-textarea hasCount rows="3" cursorSpacing="80" placeholder="Count..." bindfocus='changeinfo' bindblur='changeinfo' bindchange='changeinfo'/>
+    </wux-cell>
+    </wux-cell-group>
+</wux-cell-group>
+<view class='btn'>
+  <wux-button block outline type="dark" bindtap='tijiao'>确认提交</wux-button>
+</view>

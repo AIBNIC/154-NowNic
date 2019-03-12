@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "i-button": "../../dist/button/index",
+    "i-collapse": "../../dist/collapse/index",
+    "i-collapse-item": "../../dist/collapse-item/index",
+    "i-alert": "../../dist/alert/index",
+    "i-message": "../../dist/message/index",
+    "i-toast": "../../dist/toast/index",
+    "i-input": "../../dist/input/index",
+    "wux-button": "../../dist1/button/index"
+  },
+  "navigationBarTitleText": "查询学生信息"
+}

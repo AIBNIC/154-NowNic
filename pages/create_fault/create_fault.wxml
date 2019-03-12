@@ -1,0 +1,48 @@
+<view class="task-card">
+    <!-- <view class="page-head-line"></view> -->
+    <view class="content place">
+        <view class="laber">
+            <text>故障地区:</text>
+        </view>
+        <view class="tag-picker value">
+            <picker bindchange="placeChange" value="{{task.placeIndex}}" range="{{staticData.place}}">
+                {{staticData.place[task.placeIndex]}}
+            </picker>
+        </view>
+    </view>
+   
+    <view class="page-head-line"></view>
+    <view class="content title">
+        <view class="laber">
+            <text>学号:</text>
+        </view>
+        <view class="input">
+            <input placeholder="请输入学号" type="text"  placeholder-style="color:grey;line-height: 60rpx;" bindinput="bindInputTitle" value='{{user_num}}'/>
+        </view>
+    </view>
+    <view class="page-head-line"></view>
+    <view class="content description">
+        <view class="laber">
+            <text>描述:</text>
+        </view>
+        <!-- <view class="input">
+            <input placeholder="请输入描述" type="text" placeholder-style="color:grey;line-height: 60rpx;" bindinput="bindInputDescription" />
+        </view> -->
+    </view>
+    <view class="text-box">
+        <text>{{currentInput}}</text>
+        <textarea class="weui-textarea" placeholder="请输入文本" bindinput="getInput" maxlength="1000" value='{{currentInput}}'/>
+    </view>
+    <!-- <view class="page-head-line"></view> -->
+    <!-- <view class="page-head-line"></view> -->
+    <view class="create">
+        <button type="warn" bindtap="submit">添加</button>
+    </view>
+    <view>
+        <text>
+        学生报故障：输入学号，要确认无误
+        老师报故障：输入姓名
+        </text>
+    </view>
+    
+</view>

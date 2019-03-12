@@ -1,0 +1,70 @@
+/* pages/faultInfo/faultInfo.wxss */
+.container {
+  padding: 0;
+  font-size: 38rpx;
+  font-family: "宋体";
+}
+.user-item {
+  margin-top: 20px;
+}
+
+.user-no {
+  margin-top: 100px;
+  font-size: 16px;
+}
+
+.info-item {
+  position: relative;
+  padding: 10rpx;
+  border: 1px solid #bbb;
+  border-bottom: none;
+}
+
+.info-item:last-child {
+  border: 1px solid #bbb;
+}
+
+.info-item text {
+   display: inline-block;
+   height: 100%;
+}
+
+.info-item text:nth-child(1) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100rpx;
+  border-right: 1px solid #bbb;
+  text-align: center;
+  line-height:65rpx;
+}
+
+.info-item text:nth-child(2) {
+  width: 500rpx;
+  padding-left: 100rpx;
+  text-align: center;
+}
+
+.btns {
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: center;
+}
+.btns_btn{
+  display: block;
+  float: left;
+  /* width: 100rpx; */
+}
+.btn-clear {
+  font-size: 16px;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  background: #11A7ED;
+}
+.pic image{
+  margin: 10px auto;
+  display: block;
+  /* width: 80vw;
+  height: 80vw; */
+}

@@ -1,0 +1,54 @@
+<view class='content'>
+  <text class='title' selectable='false'>电信相关查询</text>
+  <view class='main'>
+    <view class='main_a'>
+      <!-- <text class='line'>在线人数：{{onLine}}人</text> -->
+      <text class='line'>请输入电信账号</text>
+      <input class='dxnumber' placeholder='电信号码' auto-focus placeholder-class='placeholder' bindinput="cxnumber" maxlength='11'/>
+      <button class='btn' loading='{{loading}}' hover-class="btn_hover" bindtap='searchTap'>查询</button>
+    </view>
+  </view>
+  <view class='main_b' wx:if="{{dx_state}}">
+      <p wx:if="{{dx_state=='在线'}}">电信账号：{{dx_id}}</p>
+      <p>状态:  {{dx_state}}</p>
+      <p wx:if="{{dx_state=='在线'}}">上网时间:  {{dx_time}}</p>
+      <button  wx:if="{{dx_state=='在线'}}" id='btn1' hover-class="btn1_hover" bindtap='outUser' data-dx_id="{{dx_id}}">下线</button>
+  </view>
+  <view wx:if="{{resultCode!=''}}">
+    <scroll-view scroll-y>
+          <view class='main_b'>
+              <p>姓名：{{stuName}}</p>
+              <p>电话号:  {{rechargeNbr}}</p>
+               <p>{{stuSpeed}}:  {{stuState}}</p>
+              <p>可用余额：{{totalBalance}}</p>
+              <p>提示信息:  {{reason}}</p>
+          </view>
+    </scroll-view>
+  </view>
+  <!-- <view wx:if="{{stuName=='存在同名'}}">
+    <view wx:if="{{array.length > 0}}">
+      <scroll-view scroll-y style="max-height: 200px;" >
+        <view wx:for="{{array}}">
+            <view class='main_b'>
+                <p>姓名：{{item.user_name}}</p>
+                <p>ID:  {{item.user_id}}</p>
+                <p>登录账号：{{item.user_number}}</p>
+                <p>{{item.user_speed}}:  {{item.user_state}}</p>
+            </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <view wx:if="{{stuName!='' && stuName!='存在同名'}}">
+      <scroll-view scroll-y>
+            <view class='main_b'>
+                <p>姓名：{{stuName}}</p>
+                <p>ID:  {{stuId}}</p>
+                <p>登录账号：{{stuNumber}}</p>
+                <p>{{stuSpeed}}:  {{stuState}}</p>
+            </view>
+      </scroll-view>
+  </view> -->
+  
+      
+</view>

@@ -1,0 +1,70 @@
+<!--pages/ludan/ludan.wxml-->
+<form bind:submit="tijiao" report-submit="true">
+<view class='container'>
+  <view class='title'>
+    <!-- <b>网络中心开网录入</b> -->
+  </view>
+  <view class='item'>
+    <label>身份证：</label>
+    <input type='idcard' placeholder="身份证" bindinput="cid_input"  maxlength='18' value='{{empty}}'></input>
+  </view>
+  <view class='item'>
+    <label>联系电话：</label>
+    <input type='number' placeholder="联系电话" maxlength='11' bindinput="telphone_input" value='{{empty}}'></input>
+  </view>
+  <view class='item'>
+    <label>宿舍号：</label>
+    <input type='text' placeholder="如22#1314" bindinput="room_input" value='{{stuinfo.stu_room}}'></input>
+  </view>
+  <view class='item'>
+    <label>电信号码：</label>
+    <input type='number' placeholder="新办电信号码" maxlength='11' bindinput="newphone_input" style='max-width:44%' id='picker_a'  value='{{newphone_input}}'></input>
+    <picker bindchange="bindPickerChange1" value="{{dx_index}}" range="{{level}}" style='max-width:15%' id='picker_a'>
+      <view class="picker_a" >
+        <input type='botton' value='{{level[dx_index]}}' style='color:red;' disabled='disabled'></input>
+      </view>
+    </picker>
+  </view>
+  <view class='item'>
+    <label>赠送号码：</label>
+    <input type='number' placeholder="赠送电信号码" maxlength='11' bindinput="sendphone_input" style='max-width:44%' id='picker_a'  value='{{sendphone_input}}'></input>
+    <picker bindchange="bindPickerChange2" value="{{zx_index}}" range="{{tip}}" style='max-width:15%' id='picker_a'>
+      <view class="picker_a" >
+        <input type='button' value='{{tip[zx_index]}}' style='color:red;' disabled='disabled' ></input>
+      </view>
+    </picker>
+  </view>
+  <view class='item'>
+    <label>意向单号：</label>
+    <input type='number' placeholder="2M要！！8M不用意向单号" bindinput="danhao_input"  value='{{empty}}'></input>
+  </view>
+  <view class='item'>
+    <picker bindchange="bindPickerChange" value="{{tc_index}}" range="{{objectArray}}" range-key="{{'name'}}" >
+      <view class="picker">
+        <label>办理类型：</label>
+        <input type='button' value='{{objectArray[tc_index].name}}' style='color:red;' disabled='disabled'></input>
+      </view>
+    </picker>
+  </view>
+  <view class='item'>
+    <label>经办人：</label>
+    <input type='text' placeholder="自己的姓名" bindinput="jbr_input" value='{{jbr_input}}'></input>
+  </view>
+  <view class='item'>
+    <label>姓名：</label>
+    <input type='text' disabled="true" style='background:#eee;' value="{{stuinfo.stu_name}}" placeholder="自动获取"></input>
+  </view>
+  <view class='item'>
+    <label>学号：</label>
+    <input type='text' disabled="true" style='background:#eee;' value="{{stuinfo.stu_number}}" placeholder="自动获取"></input>
+  </view>
+  <view class='item'>
+    <label>专业班级：</label>
+    <input type='text' disabled="true" style='background:#eee;' value="{{stuinfo.stu_major}}" placeholder="自动获取"></input>
+  </view>
+  <view class='footer'>
+    <!-- <view><button formType="reset" hover-class="btn_active" class='btn btn1' >获取</button></view> -->
+    <button hover-class="btn_active" class='btn btn2' formType="submit">提交</button>
+  </view>
+</view>
+</form>

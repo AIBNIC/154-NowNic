@@ -1,0 +1,77 @@
+<view class='content'>
+<i-toast id="toast" />
+<i-message id="message" />
+<i-message id="message1" />
+<view class='h1'></view>
+  <view class='page_row'>  
+    <view class="search">  
+      <view class="df search_arr">  
+        <icon class="searchcion" size='20' type='search'></icon>  
+        <input class="" value='{{search_info}}' maxlength='18' bindinput="bindChange" placeholder="学号/姓名/身份证" />  
+      </view>  
+    </view>  
+    <button size='' class='search-btn' bindtap='search_Stu' type='' >搜索</button>  
+  </view>  
+<scroll-view class='info' scroll-y scroll-with-animation wx:if="{{stu_name}}">
+  <view><text class='left left1'>姓名</text><text class='right'>{{stu_name}}</text></view>
+  <view><text class='left left2'>学号</text><text class='right'>{{stu_number}}</text></view>
+  <view><text class='left left1'>班级</text><text class='right'>{{stu_major}}</text></view>
+  <view><text class='left left2'>身份证</text><text class='right'>{{stu_idcard}}</text></view>
+  <view><text class='left left2'>身份后八</text><text class='right'>{{stu_idcard1}}</text></view>
+  <view><text class='left left2'>宿舍</text><text class='right'>{{stu_room}}</text></view>
+  <view><text class='left left2'>{{stu_state}}到期</text><text class='right'>{{stu_end_time}}</text></view>
+  <view><text class='left left2'>修改宿舍</text><text class='right'>{{stu_rooms}}（2 为次数已满）</text><view bindtap='resetRoom' style='align-items:center;' wx:if="{{stu_rooms != '' && user == '方宏毅'}}">重置</view></view>
+</scroll-view>
+<!-- <view class='btn_fault' bindtap='upfault'>
+    <wux-button block outline type="dark">上报故障</wux-button>
+  </view> -->
+<view class="caption-wrap">
+    <text class="caption-title"></text>
+    <i-collapse name="{{name}}">
+        <i-collapse-item title="电信8M" name="name1">
+        <view slot="content" i-class-content="green-text">
+          <view class="item" wx:for="{{dx}}" wx:key="index">
+            <block wx:if="{{item.user_name}}">
+              <scroll-view class='info' scroll-y scroll-with-animation>
+                <view><text class='left left2'>用户</text><text class='right'>{{item.user_name}}</text></view>
+                <view><text class='left left2'>电信账号</text><text class='right'>{{item.user_number}}</text></view>
+                <view><text class='left left2'>电信速率</text><text class='right'>{{item.user_speed}}</text></view>
+                <view><text class='left left2'>状态</text><text class='right'>{{item.user_state}}</text><view class='time_btn' hover-class='time_btn_hover' bindtap='changemima'>修改密码</view></view>
+                
+              </scroll-view>
+            </block>
+            <block wx:else>
+              <view>
+                <text>{{item}}!</text>
+              </view>
+            </block>
+          </view>
+        </view>
+        </i-collapse-item>
+      <i-collapse-item title="电信2M" name="name1">
+        <view slot="content" i-class-content="green-text">
+          <view class="item" wx:for="{{dx1}}" wx:key="index">
+            <block wx:if="{{item.user_name}}">
+              <scroll-view class='info' scroll-y scroll-with-animation>
+                <view><text class='left left2' style='width: 48px;'>用户</text><text class='right'>{{item.user_name}}</text></view>
+                <view><text class='left left2'>电信账号</text><text class='right'>{{item.user_number}}</text></view>
+                <view><text class='left left2'>电信速率</text><text class='right'>{{item.user_speed}}</text></view>
+                <view><text class='left left2' >状态</text><text class='right'>{{item.user_state}}</text><view class='time_btn' hover-class='time_btn_hover' bindtap='changemima_2m'>修改密码</view></view>
+              </scroll-view>
+            </block>
+            <block wx:else>
+              <view>
+                <text>{{item}}!</text>
+              </view>
+            </block>
+          </view>
+        </view>
+        </i-collapse-item>
+    </i-collapse>
+</view>
+<i-alert show-icon desc>
+    NIC 网络中心 2019
+    <view slot="desc">注意个人隐私，慎用权限！</view>
+</i-alert>
+
+</view>

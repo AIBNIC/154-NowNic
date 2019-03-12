@@ -1,0 +1,133 @@
+/* pages/fault/fault.wxss */
+.container {
+  padding: 0;
+  font-family: '微软雅黑';
+  font-weight: lighter;
+}
+
+.head {
+  position: relative;
+  width: 100%;
+  font-size: 34rpx;
+  border-bottom: 1px solid #bbb;
+}
+
+.head-left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-right: 1px solid #bbb;
+  box-sizing: border-box;
+}
+
+.head-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-left: 1px solid #bbb;
+  box-sizing: border-box;
+}
+
+.head-box {
+  margin: 0 auto;
+  height: 80rpx;
+  width: calc(100% - 200rpx);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.head .text-active {
+  color: red;
+}
+
+/* .scroll-view {} */
+
+.h-item {
+  display: inline-block;
+  padding: 0 10rpx;
+  /* width: 80rpx; */
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.user-fault {
+  padding: 10px 0;
+}
+
+.user-item {
+  margin-top: 20px;
+}
+
+.info-item {
+  position: relative;
+  padding: 10rpx;
+  font-size: 38rpx;
+  border: 1px solid #bbb;
+  border-bottom: none;
+  text-align: center;
+}
+
+.info-item:last-child {
+  border: 1px solid #bbb;
+}
+
+.info-item text {
+   display: inline-block;
+   height: 100%;
+   text-align: center;
+}
+
+.info-item text:nth-child(1) {
+  position: absolute;
+  /* top: 0;
+  left: 0; */
+  width: 100rpx;
+  /* border-right: 1px solid #bbb; */
+}
+
+.info-item text:nth-child(2) {
+  width: 500rpx;
+  padding-left: 100rpx;
+}
+
+.btn-fault {
+  display: inline-block;
+  height: 72rpx;
+  line-height: 72rpx;
+  font-size: 32rpx;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  background: #0BB7F3;
+}
+
+.btn-fault-del {
+  display: inline-block;
+  margin-left: 30rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  font-size: 32rpx;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  background: #f00;
+}
+
+.fault-null {
+  margin-top: 200rpx;
+  font-size: 40rpx;
+  color: red;
+  text-align: center;
+}
+.user_num{
+  text-align: center;
+}
