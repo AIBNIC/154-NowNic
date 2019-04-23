@@ -8,16 +8,20 @@ function searchPic(that,fault_id){
   wx.request({
     url: 'https://nic.fhyiii.cn/wxcx/public/searchPic',
     method: 'POST', //必须大写哦        
-    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    header: { 
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+   },
     dataType: "json",
     data: {
       fault_id: fault_id
     },
     success: function (res) {
+      // console.log(res)
       if(res.data.status){
         if (res.data.msg.pic == null){
           that.setData({
-            images: arr,
+            images: '',
             loading: false
           })
         }else{
@@ -47,7 +51,10 @@ function searchUserOnline(that, userid) {
   wx.request({
     url: 'https://nic.fhyiii.cn/wxcx/public/searchUserOnline',
     method: 'POST', //必须大写哦        
-    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    header: { 
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
     dataType: "json",
     data: {
       userid: userid
@@ -81,7 +88,10 @@ function searchIfC(that, fault_id) {
   wx.request({
     url: 'https://nic.fhyiii.cn/wxcx/public/searchIfC',
     method: 'POST', //必须大写哦        
-    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    header: { 
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
     dataType: "json",
     data: {
       fault_id: fault_id
@@ -120,7 +130,10 @@ function searchIfsuccess(that, fault_id) {
   wx.request({
     url: 'https://nic.fhyiii.cn/wxcx/public/searchIfsuccess',
     method: 'POST', //必须大写哦        
-    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    header: { 
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
     dataType: "json",
     data: {
       postman: postman,
@@ -142,6 +155,125 @@ function searchIfsuccess(that, fault_id) {
     }
   })
 }
+
+//8M 查名字
+function searchName(stu_name, that) {
+  that.setData({
+    loading: true
+  })
+  var dx = that.data.dx
+  var username = wx.getStorageSync('user_name')
+  wx.request({
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/searchDx',  //
+    header: { 
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
+    method: 'POST',
+    data: {
+      info: stu_name,
+      user: username
+    },
+    //20175533426
+    success: function (res) {
+      // console.log(res)
+
+      if (res.data != null){
+        if (res.data.success) { // 判断是否查询到
+          that.setData({
+            dx: res.data.msg
+          })
+
+          that.setData({
+            loading: false
+          })
+        }
+      }
+      
+    },
+    // fail:function(){
+    //   that.handleError()
+    // }
+  })
+}
+//学号 电信2M
+function searchNumber(user_number, that) {
+  that.setData({
+    loading: true
+  })
+  var dx1 = that.data.dx1
+  var username = wx.getStorageSync('user_name')
+  wx.request({
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/searchDx',  //查询设备IP 设备端口 MAC
+    header: { 
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+   },
+    method: 'POST',
+    data: {
+      info: user_number,
+      user: username
+    },
+    //20175533426
+    success: function (res) {
+      if (res.data.success) { // 判断是否查询到
+        that.setData({
+          dx1: res.data.msg
+        })
+      }
+      that.setData({
+        loading: false
+      })
+      // console.log(dx1)
+    }
+  })
+}
+
+//查询学生信息，姓名，学号，班级，身份证
+function searchInfo(user_number, that){
+  that.setData({
+    loading: true
+  })
+  wx.request({
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/StudentInfo',  //查询设备IP 设备端口 MAC
+    header: { 
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
+    method: 'POST',
+    data: {
+      content: user_number,
+      user: wx.getStorageSync('user_name')
+    },
+    //20175533426
+    success: function (res) {
+      if (res.data == false) {
+        that.setData({
+          loading: false
+        })
+        return false;
+      } else {
+        that.setData({
+          "user.idcard": res.data.stu_idcard.slice(10, 19),
+          // stu_idcard1: res.data.stu_idcard.slice(10, 19),
+          // stu_major: res.data.stu_major,
+          // stu_name: res.data.stu_name,
+          // stu_number: res.data.stu_number,
+          // stu_end_time: res.data.stu_end_time,
+          // stu_room: res.data.stu_room,
+          loading:false
+        })
+
+        // wx.hideLoading()
+        searchName(res.data.stu_idcard, that)
+        searchNumber(res.data.stu_number, that)
+        // searchAbms(res.data.stu_number, that)
+        // searchRoom(res.data.stu_number, that)
+      }
+      // console.log(that.data.user)
+    }
+  })
+}
 Page({
 
   /**
@@ -152,7 +284,7 @@ Page({
     user: {
       name: '',
       student: '',
-      mac: '',
+      idcard: '',
       ip: '',
       status: false
     },
@@ -162,34 +294,38 @@ Page({
     checksuccess:false,//是否完成了
     loading:false,
     images:[],
-    userNoExist: ''
+    userNoExist: '',
+
+    dx:[],
+    dx1:[]
   },
 
-  // 清除用户在线与绑定信息
-  clearUserInfo: function (e) {
-    const that = this;
-    console.log(e.target.dataset.student);
-    wx.showLoading({
-      title: '清除中....',
-      mask: true
-    })
-    wx.request({
-      url: 'https://nic.fhyiii.cn/NIC/app_api/net_test/restful/ruijies/' + e.target.dataset.student,
-      method: 'PUT',
-      success: function (res) {
-        wx.hideLoading()
-        wx.showToast({
-          title: '清除成功'
-        })
-        console.log(res)
-        that.setData({
-          ['user.mac']: '',
-          ['user.ip']: '',
-          ['user.status']: false
-        })
-      }
-    })
-  }, 
+  // // 清除用户在线与绑定信息
+  // clearUserInfo: function (e) {
+  //   const that = this;
+  //   console.log(e.target.dataset.student);
+  //   wx.showLoading({
+  //     title: '清除中....',
+  //     mask: true
+  //   })
+  //   wx.request({
+  //     url: 'https://nic.fhyiii.cn/NIC/app_api/net_test/restful/ruijies/' + e.target.dataset.student,
+  //     method: 'PUT',
+  //     success: function (res) {
+  //       wx.hideLoading()
+  //       wx.showToast({
+  //         title: '清除成功'
+  //       })
+  //       console.log(res)
+  //       that.setData({
+  //         ['user.mac']: '',
+  //         ['user.ip']: '',
+  //         ['user.status']: false
+  //       })
+  //     }
+  //   })
+  // }, 
+
   //接单 xuehao id postman
   getFault(e){
     wx.showLoading({
@@ -204,7 +340,10 @@ Page({
     wx.request({
       url: 'https://nic.fhyiii.cn/wxcx/public/buyFault',
       method: 'POST', //必须大写哦        
-      header: { "Content-Type": "application/x-www-form-urlencoded" },
+      header: { 
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+      },
       dataType: "json",
       data: {
         xuehao: xuehao,
@@ -227,16 +366,7 @@ Page({
             fail: function () { },  //接口调用失败的回调函数  
             complete: function () { } //接口调用结束的回调函数  
           })
-          // wx.showModal({
-          //   title: '提示',
-          //   content: '抢单成功',
-          //   showCancel:false,
-          //   success:function(res){
-          //     wx.redirectTo({
-          //       url: '../fault/fault',
-          //     })
-          //   }
-          // })
+
         }else{
           wx.showModal({
             title: '提示',
@@ -267,7 +397,10 @@ Page({
     wx.request({
       url: 'https://nic.fhyiii.cn/wxcx/public/success',
       method: 'POST', //必须大写哦        
-      header: { "Content-Type": "application/x-www-form-urlencoded" },
+      header: { 
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+      },
       dataType: "json",
       data: {
         xuehao: xuehao,
@@ -290,14 +423,6 @@ Page({
             fail: function () { },  //接口调用失败的回调函数  
             complete: function () { } //接口调用结束的回调函数  
           })
-          // wx.showModal({
-          //   title: '提示',
-          //   content: '',
-          //   showCancel: false,
-          //   success: function (res) {
-              
-          //   }
-          // })
         } else {
           wx.showModal({
             title: '提示',
@@ -333,14 +458,12 @@ Page({
     that.setData({
       student: options.student,
       name: options.name,
-      fault_id: options.fault_id
+      fault_id: options.fault_id,
+      time: options.fault_time,
     })
 
-    // GET 查询用户锐捷信息
-    // wx.showLoading({
-    //   title: '加载中...',
-    //   mask: true
-    // })
+    //查询个人信息
+    searchInfo(options.student, that)
 
     //查询是否在线
     searchUserOnline(that, options.student)
@@ -417,27 +540,6 @@ Page({
     // })
   },
 
-  // POST 查询用户是否在线
-  // postGetUser: function () {
-  //   var that = this
-  //   wx.request({
-  //     url: 'https://nic.fhyiii.cn/NIC/app_api/net_test/restful/ruijies/' + that.data.student,
-  //     method: 'POST',
-  //     success: function (res) {
-  //       // console.log(res);
-  //       wx.hideLoading()
-  //       if (res.data.error) {
-  //         app.errorMessge(res.data.error);
-  //       } else {
-  //         that.setData({
-  //           ['user.mac']: res.data[0].USERMAC,
-  //           ['user.ip']: res.data[0].USERIP,
-  //           ['user.status']: true
-  //         })
-  //       }
-  //     }
-  //   })
-  // },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -445,7 +547,7 @@ Page({
   onReady: function () {
     // app.checkLogin()
     wx.setNavigationBarTitle({
-      title: '用户信息'
+      title: '详情信息'
     })
   },
 
@@ -487,7 +589,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
+  
 })

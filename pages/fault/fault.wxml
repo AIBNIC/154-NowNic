@@ -1,33 +1,30 @@
-
-<view class="container">
+<view class="container web-font">
   <!-- 滑动选择框 -->
-  <view class="head">
-    <text class="head-left {{user_floor == user.floor ? 'text-active': ''}}" data-ds="{{user.floor}}" bindtap="searchFault">{{user.floor}}</text>
-    <view class="head-box">
-    <!-- 当前栋数 -->
-      <scroll-view class="scroll-view" scroll-x>
-        <text class="h-item {{user_floor == 13 ? 'text-active': ''}} " data-ds="13" bindtap="searchFault">13</text>
-        <text class="h-item {{user_floor == 14 ? 'text-active': ''}} " data-ds="14" bindtap="searchFault">14</text>
-        <text class="h-item {{user_floor == '18,19' ? 'text-active': ''}} " data-ds="18,19" bindtap="searchFault">18,19</text>
-        <text class="h-item {{user_floor == '20,21' ? 'text-active': ''}} " data-ds="20,21" bindtap="searchFault">20,21</text>
-        <text class="h-item {{user_floor == 22 ? 'text-active': ''}} " data-ds="22" bindtap="searchFault">22</text>
-        <text class="h-item {{user_floor == 23 ? 'text-active': ''}} " data-ds="23" bindtap="searchFault">23</text>
-        <text class="h-item {{user_floor == 24 ? 'text-active': ''}} " data-ds="24" bindtap="searchFault">24</text>
-        <text class="h-item {{user_floor == '25,26' ? 'text-active': ''}} " data-ds="25,26" bindtap="searchFault">25,26</text>
-        <text class="h-item {{user_floor == 27 ? 'text-active': ''}} " data-ds="27" bindtap="searchFault">27</text>
-      </scroll-view>
+  <!-- <view wx:for="{{10}}" wx:key wx:if="{{index==TabCur}}" class='bg-grey padding margin text-center'>
+    Tab{{index}}
+  </view> -->
+<!-- <view style='z-index:99;'> -->
+  <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+    <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{room}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+      {{item.title}}
     </view>
-    <text class="head-right {{user_floor == '' ? 'text-active': ''}} " data-ds="" bindtap="searchFault">ALL</text>
-  </view>
+  </scroll-view>
+<!-- </view> -->
+    <!-- <view class='text-bold text-xxl margin-xl'>{{item.title}} 栋故障</view> -->
+    <!-- <view class='text-xl margin-xl'>点击头像打开抽屉</view>
+    <navigator class='cu-btn bg-green lg block shadow radius margin-xl' open-type="navigateBack" delta="1" hover-class="none">
+      <text class='icon-back'> </text> 返回上一页
+    </navigator> -->
+   
+ 
 
   <!-- 用户信息 -->
-  <!-- <wux-refresher id="wux-refresher" bind:pulling="onPulling" bind:refresh="onRefresh" distance="60"  pullingText="想刷新？？"> -->
-  <view class="user-fault">
+  <view class="user-fault" style='margin-top:95rpx;'>
     <view wx:if="{{user_num}}" class='user_num'>{{user_num}} 个故障 , 加油鸭！</view>
     <!-- 用户信息模版 -->
     <view wx:if="{{faultStatus == 2}}">
       <block wx:for="{{faultData}}" wx:for-item="item" wx:key="key" wx:for-index="index">
-        <template is="userFault" data="{{...{index: index + 1, student_name: item.student_name, student_number: item.student_number, floor: item.floor, room: item.room, fault_name: item.fault_name, fault_description: item.fault_description, reporting_time: item.reporting_time, fault_id: item.fault_id, userFloor: user.floor, activeFloor: user_floor, userName: user.name} }}"></template> 
+        <template is="userFault" data="{{...{index: index + 1, student_name: item.student_name, student_number: item.student_number, floor: item.floor, room: item.room, fault_name: item.fault_name, fault_description: item.fault_description, reporting_time: item.reporting_time, fault_id: item.fault_id, userFloor: user.user_floor, activeFloor: user_floor, userName: user.name,userLevel:user.level} }}"></template> 
       </block>
     </view>
 
@@ -35,12 +32,11 @@
        <view class="fault-null">故障为空</view> 
     </view>
   </view>
-  <!-- </wux-refresher> -->
 </view>
 
 <!-- 用户信息模版 -->
 <template name="userFault">
-  <view class="user-item">
+  <view class="user-item" >
     <view class="info-item">
       <text>序号</text><text>{{index}}</text>
     </view>
@@ -53,19 +49,20 @@
     <view class="info-item">
       <text>宿舍</text><text>{{floor}}#{{room}}</text>
     </view>
-    <view class="info-item">
+    <!-- <view class="info-item">
       <text>类型</text><text>{{fault_name}}</text>
-    </view>
+    </view> -->
     <view class="info-item">
       <text>描述</text><text class="fault-ms">{{fault_description}}</text>
     </view>
     <view class="info-item">
       <text>时间</text><text>{{reporting_time}}</text>
     </view>
-    <view class="info-item">
-      <button class="btn-fault" data-user="{{student_number}}" data-faultId="{{fault_id}}"  data-name="{{student_name}}" bindtap="getUserFault">查看详情</button>
-      <button wx:if="{{activeFloor == userFloor || userName == '方宏毅' || userName == '林洪佳老师' || userName == '赖国鸿老师' || userName == '张水生' }}" class="btn-fault-del" data-faultId="{{fault_id}}" data-userName="{{student_name}}" bindtap="checkDelFault">删除故障</button>
+    <view class="info-item" wx:if="{{userLevel>0 }}">
+    
+      <button class="cu-btn bg-blue shadow button-hover" data-user="{{student_number}}" data-userName="{{student_name}}" data-faultId="{{fault_id}}" data-faultTime="{{reporting_time}}" bindtap="getUserFault" style='margin: 10rpx 0;'>查看详情</button>
+      <!-- <button wx:if="{{activeFloor == userFloor || userName == '方宏毅'}}" class="btn-fault-del" data-faultId="{{fault_id}}" data-userName="{{student_name}}" bindtap="checkDelFault">删除故障</button> -->
+      <button wx:if="{{activeFloor == userFloor && userLevel > 1 || userLevel == 4}}" class="btn-fault-del cu-btn bg-red shadow button-hover" data-faultId="{{fault_id}}" data-userName="{{student_name}}" bindtap="checkDelFault">删除故障</button>
     </view>
   </view>
 </template>
-<!-- <wux-floating-button position="{{ position }}" theme="{{ theme }}" buttons="{{ buttons }}" bind:change="onChange" bind:click="onClick" bind:contact="onContact" bind:getuserinfo="onGotUserInfo" /> -->

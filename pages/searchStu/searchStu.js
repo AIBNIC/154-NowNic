@@ -7,34 +7,49 @@ const app = getApp()
 function searchName(stu_name,that){
   var dx = that.data.dx
   wx.request({
-    url: 'https://nic.fhyiii.cn/dx/dx_pachong/search.php',  //查询设备IP 设备端口 MAC
-    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/searchDx',  //查询设备IP 设备端口 MAC
+    header: {          
+      "Content-Type": "application/x-www-form-urlencoded",         
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")       
+    },
     method: 'POST',
     data: {
-      info: stu_name
+      info: stu_name,
+      user: that.data.user
     },
     //20175533426
     success: function (res) {
       if (res.data.success) { // 判断是否查询到
-        for (var i = 0; i < res.data.msg.length; i++) {
-          if (res.data.msg[i].user_cid === '') {  // 无此用户时
-            that.setData({
-              ['dx[' + i + ']']: '无此用户'
-            })
-          } else {  // 搜索到用户信息
-            that.handleSuccess()
-            that.setData({
-              ['dx[' + i + ']']: res.data.msg[i]
-            })
+        if (res.data.msg.length){
+          for (var i = 0; i < res.data.msg.length; i++) {
+            if (res.data.msg[i].user_cid === '') {  // 无此用户时
+              that.setData({
+                ['dx[' + i + ']']: '无此用户'
+              })
+            } else {  // 搜索到用户信息
+              that.handleSuccess()
+              that.setData({
+                ['dx[' + i + ']']: res.data.msg[i]
+              })
 
-            // 处理身份证后八位
-            that.setData({
-              ['dx[' + i + '].user_cid2']: that.data.dx[i].user_cid.slice(11, 19)
-            })
+              // 处理身份证后八位
+              that.setData({
+                ['dx[' + i + '].user_cid2']: that.data.dx[i].user_cid.slice(11, 19)
+              })
+            }
           }
+        }else{
+          that.handleSuccess()
+          that.setData({
+            'dx[0]': res.data.msg
+          })
+          // 处理身份证后八位
+          that.setData({
+            ['dx[0].user_cid2']: that.data.dx[0].user_cid.slice(11, 19)
+          })
         }
+       
       }
-      console.log(dx)
     },
     // fail:function(){
     //   that.handleError()
@@ -45,35 +60,50 @@ function searchName(stu_name,that){
 function searchNumber(user_number, that) {
   var dx1 = that.data.dx1
   wx.request({
-    url: 'https://nic.fhyiii.cn/dx/dx_pachong/search.php',  //查询设备IP 设备端口 MAC
-    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/searchDx',  //查询设备IP 设备端口 MAC
+    header: {          
+      "Content-Type": "application/x-www-form-urlencoded",         
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")       
+    },
     method: 'POST',
     data: {
-      info: user_number
+      info: user_number,
+      user: that.data.user
     },
     //20175533426
     success: function (res) {
       if (res.data.success) { // 判断是否查询到
-        for (var i = 0; i < res.data.msg.length; i++) {
-          if (res.data.msg[i].user_cid === '') {  // 无此用户时
-            that.handleSuccess()
-            that.setData({
-              ['dx1[' + i + ']']: '无此用户'
-            })
-          } else {  // 搜索到用户信息
-            that.handleSuccess()
-            that.setData({
-              ['dx1[' + i + ']']: res.data.msg[i]
-            })
+        if(res.data.msg.length){
+          for (var i = 0; i < res.data.msg.length; i++) {
+            if (res.data.msg[i].user_cid === '') {  // 无此用户时
+              that.handleSuccess()
+              that.setData({
+                ['dx1[' + i + ']']: '无此用户'
+              })
+            } else {  // 搜索到用户信息
+              that.handleSuccess()
+              that.setData({
+                ['dx1[' + i + ']']: res.data.msg[i]
+              })
 
-            // 处理身份证后八位
-            that.setData({
-              ['dx1[' + i + '].user_cid2']: that.data.dx1[i].user_cid.slice(11, 19)
-            })
+              // 处理身份证后八位
+              that.setData({
+                ['dx1[' + i + '].user_cid2']: that.data.dx1[i].user_cid.slice(11, 19)
+              })
+            }
           }
+        }else{
+          that.handleSuccess()
+          that.setData({
+            'dx1[0]': res.data.msg
+          })
+          // 处理身份证后八位
+          that.setData({
+            ['dx1[0].user_cid2']: that.data.dx1[0].user_cid.slice(11, 19)
+          })
         }
+       
       }
-      console.log(dx1)
     }
   })
 }
@@ -81,10 +111,14 @@ function searchNumber(user_number, that) {
 function searchRoom(user_number, that) {
   wx.request({
     url: 'https://nic.fhyiii.cn/wxcx/public/selectRoom',
-    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    header: {          
+      "Content-Type": "application/x-www-form-urlencoded",         
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")       
+    },
     method: 'POST',
     data: {
-      xuehao: user_number
+      xuehao: user_number,
+      user: that.data.user
     },
     success: function (res) {
       if (res.data.status) {
@@ -100,13 +134,18 @@ function searchRoom(user_number, that) {
   })
 }
 
+//查询安朗到期
 function searchAbms(user_number, that){
   wx.request({
     url: 'https://nic.fhyiii.cn/wxcx/public/getStudentState ',
-    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    header: {          
+      "Content-Type": "application/x-www-form-urlencoded",      
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
     method: 'POST',
     data: {
-      xuehao: user_number
+      xuehao: user_number,
+      user: that.data.user
     },
     success: function (res) {//400002 无用户  100002 成功
       if (res.data.status) {
@@ -127,6 +166,34 @@ function searchAbms(user_number, that){
     }
   })
 }
+
+//查询安朗在线
+function searchAbmsIP(user_number, that) {
+  wx.request({
+    url: 'https://nic.fhyiii.cn/wxcx/public/searchUserOnline',
+    header: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
+    method: 'POST',
+    data: {
+      userid: user_number,
+      user: that.data.user
+    },
+    success: function (res) {//400002 无用户  100002 成功
+      if (res.data.status) {
+          that.setData({
+            stu_ip: res.data.ip
+          })
+      }else{
+        that.setData({
+          stu_ip: res.data.msg
+        })
+      }
+    }
+  })
+}
+
 Page({
 
   handleLoadingT() {
@@ -203,6 +270,7 @@ Page({
   //查询学生
   search_Stu:function () {
     var that = this;
+    console.log(that.data)
     that.data.dx = [];
     that.data.dx1 = [];
     
@@ -220,8 +288,11 @@ Page({
     
     //查询学生信息，姓名，学号，班级，身份证
     wx.request({
-      url: 'https://nic.fhyiii.cn/nic/searchStu/search.php',  //查询设备IP 设备端口 MAC
-      header: { "Content-Type": "application/x-www-form-urlencoded" },
+      url: 'https://nic.fhyiii.cn/wxcx/public/index/StudentInfo',  //查询设备IP 设备端口 MAC
+      header: { 
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+      },
       method: 'POST',
       data: {
         content: search_info,
@@ -229,7 +300,7 @@ Page({
       },
       //20175533426
       success: function (res) {
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data == false){
           that.handleError();
           wx.hideLoading();
@@ -249,6 +320,7 @@ Page({
           searchNumber(res.data.stu_number, that)
           searchAbms(res.data.stu_number, that)
           searchRoom(res.data.stu_number, that)
+          searchAbmsIP(res.data.stu_number, that)
         }
       }
     })
@@ -260,7 +332,10 @@ Page({
     let that = this;
     wx.request({
       url: 'https://nic.fhyiii.cn/wxcx/public/updateRoom',
-      header: { "Content-Type": "application/x-www-form-urlencoded" },
+      header: {          
+        "Content-Type": "application/x-www-form-urlencoded",         
+        "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")       
+      },
       method: 'POST',
       data: {
         xuehao: this.data.stu_number
@@ -285,14 +360,16 @@ Page({
     this.handleLoadingT()
     var that = this;
     wx.request({
-      url: 'https://nic.fhyiii.cn/dx/dx_pachong/reset.php',
+      url: 'https://nic.fhyiii.cn/wxcx/public/index/reset',
       method: 'post',
       header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")  
       },
       data: {
         'info': this.data.dx[0].user_number,
-        'password': 'A' + this.data.dx[0].user_cid2
+        'password': 'A' + this.data.dx[0].user_cid2,
+        'user': that.data.user
       },
       success: function (res) {
         console.log(res)
@@ -312,14 +389,16 @@ Page({
     this.handleLoadingT()
     var that = this;
     wx.request({
-      url: 'https://nic.fhyiii.cn/dx/dx_pachong/reset.php',
+      url: 'https://nic.fhyiii.cn/wxcx/public/index/reset',
       method: 'post',
       header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")  
       },
       data: {
         'info': this.data.dx1[0].user_number,
-        'password': 'A' + this.data.stu_idcard1
+        'password': 'A' + this.data.stu_idcard1,
+        'user': that.data.user
       },
       success: function (res) {
         console.log(res)
@@ -334,29 +413,32 @@ Page({
     })
   },
   //手动报故障
-  upfault:function(){
-    wx.navigateTo({
-      url: '../upfault/upfault?username=' + this.data.stu_name + '&&stu_number=' + this.data.stu_number + '&&stu_room=' + this.data.stu_room,
-    })
-  },
+  // upfault:function(){
+  //   wx.navigateTo({
+  //     url: '../upfault/upfault?username=' + this.data.stu_name + '&&stu_number=' + this.data.stu_number + '&&stu_room=' + this.data.stu_room,
+  //   })
+  // },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.checkLogin()
+    // app.checkLogin()
     try {
       var user = wx.getStorageSync('user_name')
-      if (user == '') {
+      // console.log(wx.getStorageSync('level'))
+      if (user == '' || user == 'undefined') {
         wx.switchTab({
           url: '../login/login'
         });
       } else {
         console.log(user)
         this.setData({
-          user:user
+          user:user,
+          userlevel: wx.getStorageSync('level')
         })
       }
     } catch (e) {
+      console.log(e)
       // Do something when catch error
     }
   },
@@ -406,7 +488,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

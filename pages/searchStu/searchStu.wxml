@@ -1,33 +1,48 @@
-<view class='content'>
+<view class='content web-font'>
 <i-toast id="toast" />
-<i-message id="message" />
-<i-message id="message1" />
+<i-message id="message" style="z-index:99"/>
+<i-message id="message1" style="z-index:99"/>
 <view class='h1'></view>
   <view class='page_row'>  
-    <view class="search">  
+    <!-- <view class="search">  
       <view class="df search_arr">  
+      <text class='icon-search lg text-gray'></text>
         <icon class="searchcion" size='20' type='search'></icon>  
         <input class="" value='{{search_info}}' maxlength='18' bindinput="bindChange" placeholder="学号/姓名/身份证" />  
       </view>  
     </view>  
-    <button size='' class='search-btn' bindtap='search_Stu' type='' >搜索</button>  
+    <text id='search-btn' bindtap='search_Stu'>搜索</text> -->
+    <!-- <input type='button'>搜索</input> -->
+    <!-- <button size='' id='search-btn' bindtap='search_Stu' type='' >搜索</button>   -->
+    <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;z-index:99" >
+      <view class='search-form round'>
+        <text class="icon-search"></text>
+        <input type="text" value='{{search_info}}' maxlength='18' bindinput="bindChange" placeholder="输入搜索的学号/姓名/身份证" confirm-type="search"></input>
+      </view>
+      <view class='action'>
+        <button class='cu-btn bg-gradual-blue shadow-blur round' bindtap='search_Stu'>搜索</button>
+      </view>
+    </view>
   </view>  
+<view style='margin-top:75rpx;'>
+
 <scroll-view class='info' scroll-y scroll-with-animation wx:if="{{stu_name}}">
   <view><text class='left left1'>姓名</text><text class='right'>{{stu_name}}</text></view>
   <view><text class='left left2'>学号</text><text class='right'>{{stu_number}}</text></view>
   <view><text class='left left1'>班级</text><text class='right'>{{stu_major}}</text></view>
-  <view><text class='left left2'>身份证</text><text class='right'>{{stu_idcard}}</text></view>
+  <view wx:if="{{userlevel >3}}"><text class='left left2'>身份证</text><text class='right'>{{stu_idcard}}</text></view>
   <view><text class='left left2'>身份后八</text><text class='right'>{{stu_idcard1}}</text></view>
   <view><text class='left left2'>宿舍</text><text class='right'>{{stu_room}}</text></view>
   <view><text class='left left2'>{{stu_state}}到期</text><text class='right'>{{stu_end_time}}</text></view>
-  <view><text class='left left2'>修改宿舍</text><text class='right'>{{stu_rooms}}（2 为次数已满）</text><view bindtap='resetRoom' style='align-items:center;' wx:if="{{stu_rooms != '' && user == '方宏毅'}}">重置</view></view>
+  <view wx:if="{{userlevel >3}}"><text class='left left2'>安朗在线</text><text class='right'>{{stu_ip}}</text></view>
+  <view><text class='left left2'>修改宿舍</text><text class='right'>{{stu_rooms}}（2 为次数已满）</text><view bindtap='resetRoom' style='align-items:center;' wx:if="{{stu_rooms != '' && userlevel >3}}">重置</view></view>
 </scroll-view>
 <!-- <view class='btn_fault' bindtap='upfault'>
     <wux-button block outline type="dark">上报故障</wux-button>
   </view> -->
-<view class="caption-wrap">
+<view class="caption-wrap" wx:if="{{dx1 != ''}}">
     <text class="caption-title"></text>
-    <i-collapse name="{{name}}">
+    <i-collapse name="{{name}}" >
         <i-collapse-item title="电信8M" name="name1">
         <view slot="content" i-class-content="green-text">
           <view class="item" wx:for="{{dx}}" wx:key="index">
@@ -48,7 +63,7 @@
           </view>
         </view>
         </i-collapse-item>
-      <i-collapse-item title="电信2M" name="name1">
+      <i-collapse-item title="电信2M" name="name1" >
         <view slot="content" i-class-content="green-text">
           <view class="item" wx:for="{{dx1}}" wx:key="index">
             <block wx:if="{{item.user_name}}">
@@ -69,9 +84,13 @@
         </i-collapse-item>
     </i-collapse>
 </view>
-<i-alert show-icon desc>
+
+
+<i-alert show-icon desc wx:if="{{stu_name}}">
     NIC 网络中心 2019
     <view slot="desc">注意个人隐私，慎用权限！</view>
 </i-alert>
+
+</view>
 
 </view>

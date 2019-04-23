@@ -5,14 +5,16 @@ function getStuinfo(that,cid) {
     title: '查询信息中',
   })
   wx.request({
-    // url: 'https://nic.fhyiii.cn/nic/2019kaiwang/searchstu.php',
-    url: 'https://nic.fhyiii.cn/nic/searchStu/search.php',
-    header: { "Content-Type":"application/x-www-form-urlencoded"},
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/StudentInfo',
+    header: { 
+      "Content-Type":"application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
     method: 'POST',
     data: {
       content: cid,
       user: that.data.jbr_input
-    }, //
+    }, 
     success: function (res) {
       if (res.data==false){
         wx.hideLoading()
@@ -320,10 +322,12 @@ Page({
     })
     // console.log(this.data.state)
     var name = wx.getStorageSync('user_name')
+
     this.setData({
       jbr_input: name,
     })
     console.log(name)
+
     this.setData({
         openid: wx.getStorageSync('openid')
     })
@@ -390,7 +394,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
   
-  }
+  // }
 })

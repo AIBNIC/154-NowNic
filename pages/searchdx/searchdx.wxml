@@ -1,22 +1,64 @@
-<view class='content'>
-  <text class='title' selectable='false'>电信相关查询</text>
-  <view class='main'>
-    <view class='main_a'>
-      <!-- <text class='line'>在线人数：{{onLine}}人</text> -->
-      <text class='line'>请输入电信账号</text>
-      <input class='dxnumber' placeholder='电信号码' auto-focus placeholder-class='placeholder' bindinput="cxnumber" maxlength='11'/>
-      <button class='btn' loading='{{loading}}' hover-class="btn_hover" bindtap='searchTap'>查询</button>
+<view class='content web-font'>
+  <!-- <text class='title' selectable='false'>电信相关查询</text> -->
+  <view class="cu-bar bg-white">
+    <view class='action'>
+      <text class='icon-titles text-green'></text>
+      <text class='text-xl text-bold'>在线人数:{{onLine}}</text>
     </view>
   </view>
-  <view class='main_b' wx:if="{{dx_state}}">
-      <p wx:if="{{dx_state=='在线'}}">电信账号：{{dx_id}}</p>
-      <p>状态:  {{dx_state}}</p>
-      <p wx:if="{{dx_state=='在线'}}">上网时间:  {{dx_time}}</p>
-      <button  wx:if="{{dx_state=='在线'}}" id='btn1' hover-class="btn1_hover" bindtap='outUser' data-dx_id="{{dx_id}}">下线</button>
+  <view class="cu-bar search bg-white">
+      <view class='search-form round'>
+        <text class="icon-search"></text>
+        <input class='dxnumber' type="text" bindinput="cxnumber" placeholder="输入电信账号" confirm-type="search" maxlength='11'></input>
+      </view>
+      <view class='action'>
+        <button class='cu-btn bg-green shadow-blur round' bindtap='searchTap' >搜索</button>
+      </view>
   </view>
-  <view wx:if="{{resultCode!=''}}">
+  <view class="margin radius bg-gradual-green shadow-blur" wx:if="{{loading}}">
+    <image src='https://image.weilanwl.com/gif/wave.gif' mode='scaleToFill' class='gif-black response' style='height:100rpx;mix-blend-mode:screen'></image>
+  </view>
+  <view class='main'>
+    <!-- <view class='main_a'>
+      <text class='line'>在线人数：{{onLine}}人</text>
+      <text class='line'>请输入电信账号 </text>
+      <input class='dxnumber' placeholder='电信号码' auto-focus placeholder-class='placeholder' bindinput="cxnumber" maxlength='11'/>
+      <button class='btn' loading='{{loading}}' hover-class="btn_hover" bindtap='searchTap'>查询</button>
+    </view> -->
+  </view>
+  <!-- 20185532116 -->
+  <view class='cu-list menu' style='margin:30rpx;'>
+    <!-- <view class='padding-sm radius margin-top-sm text-m' wx:if="{{dx_state}}">
+      <view wx:if="{{dx_state!=''}} " style="width:100%;">电信账号: {{dx_id}}</view>
+      <view style="width:100%;">用户状态:  {{dx_state}}</view>
+      <view wx:if="{{dx_state=='在线'}}" style="width:100%;">上网时间:  {{dx_time}}</view>
+      
+    </view> -->
+    <view wx:if="{{dx_state!=''}}" class='cu-item shadow '>
     <scroll-view scroll-y>
-          <view class='main_b'>
+          <view class='padding-sm radius margin-top-sm text-sm'>
+              <view class='content'>姓名:  {{stuName}}</view>
+              <view class='content'>{{stuSpeed}}:  {{stuState}}</view>
+              <view class='content' wx:if="{{dx_state!=''}} ">用户状态: {{dx_state}}</view>
+              <view class='content' wx:if="{{dx_time!=''}} ">上网时间:  {{dx_time}}</view>
+              <view class='content' wx:if="{{dx_id!=''}} ">电信账号: {{dx_id}}</view>
+              <view class='content' wx:if="{{rechargeNbr}} ">电话号:  {{rechargeNbr}}</view>
+              <view class='content' wx:if="{{totalBalance}} ">可用余额: {{totalBalance}}</view>
+              <view class='content' wx:if="{{reason}}">提示信息:  {{reason}}</view>
+              <!-- <p>姓名：{{stuName}}</p>
+              <p>电话号:  {{rechargeNbr}}</p>
+               <p>{{stuSpeed}}:  {{stuState}}</p>
+              <p>可用余额：{{totalBalance}}</p>
+              <p>提示信息:  {{reason}}</p> -->
+          </view>
+          <button class="cu-btn bg-green shadow-blur" style="margin-bottom:10px;width:100%;" wx:if="{{dx_state=='在线'}}" id='' hover-class="" bindtap='outUser' data-dx_id="{{dx_id}}">下线</button>
+    </scroll-view>
+  </view>
+  </view>
+  
+  <!-- <view wx:if="{{resultCode!=''}}">
+    <scroll-view scroll-y>
+          <view class=' cu-item shadow'>
               <p>姓名：{{stuName}}</p>
               <p>电话号:  {{rechargeNbr}}</p>
                <p>{{stuSpeed}}:  {{stuState}}</p>
@@ -24,7 +66,7 @@
               <p>提示信息:  {{reason}}</p>
           </view>
     </scroll-view>
-  </view>
+  </view> -->
   <!-- <view wx:if="{{stuName=='存在同名'}}">
     <view wx:if="{{array.length > 0}}">
       <scroll-view scroll-y style="max-height: 200px;" >

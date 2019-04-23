@@ -1,16 +1,34 @@
-<view class="container">
+<view class="container web-font">
   <!-- logo -->
-  <view>
+  <!-- <view>
     <text class="login-title">AIB增城校区主网管</text>
     <image class="login-logo" src="../../images/login.png"></image>
+  </view> -->
+  
+  <view style='width:100%'>
+    <view class="margin radius bg-gradual-blue shadow-blur header">
+      <view class='login-title'>AIB网络中心</view>
+      <image src='https://image.weilanwl.com/gif/wave.gif' mode='scaleToFill' class='gif-black response' style='height:64rpx;mix-blend-mode:screen;position: absolute;bottom:0px;'></image>
+    </view>
+    <!-- <swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+    <swiper-item wx:for="{{4}}" wx:key class="{{cardCur==index?'cur':''}}">
+      <view class='bg-img shadow-blur' style="background-image:url(https://image.weilanwl.com/img/4x3-{{index+1}}.jpg);boder:1px solid red;"></view>
+    </swiper-item>
+  </swiper> -->
   </view>
+  
   <!-- 输入框 -->
-  <view>
-    <input class="input" type="number" maxlength="11" bindblur="userID" bindconfirm="userID" bindinput="userID" placeholder="帐号"></input>
-    <input class="input" type="text" password="true" placeholder="密码" bindblur="userPass" bindconfirm="userPass" bindinput="userPass"></input>
+  <view style='width:90%'>
+    <view class="padding-xl radius shadow-warp bg-white margin-top">
+      <input class="input" type="number" maxlength="11" bindblur="userID" bindconfirm="userID" bindinput="userID" placeholder="帐号" ></input>
+      <input class="input" type="text" password="true" placeholder="密码" bindblur="userPass" bindconfirm="userPass" bindinput="userPass" ></input>
+    </view>
+    <!-- <input class="input" type="number" maxlength="11" bindblur="userID" bindconfirm="userID" bindinput="userID" placeholder="帐号" ></input>
+    <input class="input" type="text" password="true" placeholder="密码" bindblur="userPass" bindconfirm="userPass" bindinput="userPass" ></input> -->
   </view>
   <!-- 登录 -->
   <view class="btns">
-    <button class="btn-login" bindtap="checkUser">登录</button>
+    <button class="btn-login cu-btn lg button-hover bg-gradual-blue shadow " bindtap="checkUser" >登录</button>
   </view>
 </view>
+<!-- <view style='margin-top:20px;'> 测试账号：12345678910 密码：123456</view> -->

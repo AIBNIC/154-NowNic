@@ -1,10 +1,14 @@
 /* pages/fault/fault.wxss */
 .container {
   padding: 0;
-  font-family: '微软雅黑';
-  font-weight: lighter;
+  /* font-family: '微软雅黑'; */
+  /* font-weight: lighter; */
 }
-
+.nav{
+  position: fixed;
+  top: 0;
+  z-index: 99;
+}
 .head {
   position: relative;
   width: 100%;
@@ -111,23 +115,51 @@
 }
 
 .btn-fault-del {
-  display: inline-block;
-  margin-left: 30rpx;
+  margin: 10rpx 0;
+  margin-left: 20rpx;
+
+  /* display: inline-block;
+  margin-top:4rpx;
   height: 72rpx;
   line-height: 72rpx;
   font-size: 32rpx;
   color: #fff;
   border: none;
   border-radius: 4px;
-  background: #f00;
+  background: #f00; */
 }
+
 
 .fault-null {
   margin-top: 200rpx;
   font-size: 40rpx;
-  color: red;
+  color: green;
   text-align: center;
 }
 .user_num{
   text-align: center;
+}
+.fault{
+  /* margin: 20rpx auto; */
+  /* font-size: 32rpx; */
+}
+
+.fault_header{
+  display: block;
+  width: 100%;
+  min-height: 45rpx;
+  /* overflow: hidden; */
+}
+/* position: absolute;bottom:5rpx;right:0px; */
+/* 清除浮动 */
+/* .fault_header::after{
+  display: block;
+  height: 0;
+  clear:both;
+  content:'';
+  background: #fff;
+} */
+
+view{
+  /* box-sizing:border-box; */
 }

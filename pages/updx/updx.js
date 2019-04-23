@@ -42,9 +42,12 @@ function sendMessage(e,that){
 function searchStu(e,that){
   that.showToptips3()
   wx.request({
-    url: 'https://nic.fhyiii.cn/nic/searchStu/search.php',
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/StudentInfo',
     method: 'POST',
-    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    header: { 
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+   },
     data: { content: e , user: that.data.user_name},
     success: function (res) {
       console.log(res.data)
@@ -62,9 +65,12 @@ function searchStu(e,that){
 function searchName(e,that){
   that.showToptips3()
   wx.request({
-    url: 'https://nic.fhyiii.cn/nic/searchStu/search.php',
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/StudentInfo',
     method: 'POST',
-    header: { "Content-Type": "application/x-www-form-urlencoded" },
+    header: { 
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
     data: { 
       content: e, 
       user: that.data.user_name
@@ -131,7 +137,7 @@ Page({
   //点击学号焦点查姓名
   onNum:function(){
     if (this.data.user['name'] != '' && this.data.user['num'] == ''){
-      searchName(this.data.user['name'],this)
+      // searchName(this.data.user['name'],this)
     }
   },
   //提交按钮
@@ -166,8 +172,13 @@ Page({
             icon: 'success',
             duration: 500
           })
+         
           //成功通知
           sendMessage(e, that);
+
+          that.setData({
+            user: ""
+          })
         }else{
           wx.hideLoading()
           wx.showModal({
@@ -194,7 +205,7 @@ Page({
     // if (e.detail.value.length>= 2){
     // 
     // }
-    console.log(this.data.user)
+    // console.log(this.data.user)
   },
 
   stuNumber: function (e) {
@@ -203,7 +214,7 @@ Page({
     })
     let that = this
     if (e.detail.value.length == 11 ){
-      searchStu(e.detail.value,that)
+      // searchStu(e.detail.value,that)
     }
     console.log(this.data.user)
   },
@@ -241,7 +252,7 @@ Page({
       value: e.detail.value,
       'user.telphone': e.detail.value
     })
-    console.log(this.data.user)
+    // console.log(this.data.user)
   },
   onFocus(e) {
     this.setData({
@@ -357,8 +368,8 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })
 

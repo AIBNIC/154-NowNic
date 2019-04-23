@@ -1,60 +1,57 @@
-<!--pages/applist/applist.wxml-->
-<!-- <wux-notice-bar loop speed="100" wux-class="notice-bar"   content=" {{ tip }} " icon="https://nic.fhyiii.cn/dog.png"  /> -->
-<i-grid>
-    <i-grid-item>
-        <i-grid-icon bindtap="searchStu" >
-            <image src="../../images/loupe.png" />
-        </i-grid-icon>
-        <i-grid-label>查信息</i-grid-label>
-    </i-grid-item>
-    <i-grid-item bindtap="camera">
-        <i-grid-icon>
-            <image src="../../images/ruijie.png" />
-        </i-grid-icon>
-        <i-grid-label>上传证件照</i-grid-label>
-    </i-grid-item>
-    <i-grid-item bindtap="ludan">
-        <i-grid-icon>
-            <image src="../../images/ludan.png" />
-        </i-grid-icon>
-        <i-grid-label>开网录单</i-grid-label>
-    </i-grid-item>
-    <!-- <i-grid-item>Grid</i-grid-item>
-    <i-grid-item>Grid</i-grid-item> -->
-</i-grid>
-<i-grid>
-    <i-grid-item bindtap="searchdx">
-        <i-grid-icon>
-            <image src="../../images/dx.png" />
-        </i-grid-icon>
-        <i-grid-label>电信查询</i-grid-label>
-    </i-grid-item>
-    <i-grid-item bindtap="updx">
-        <i-grid-icon>
-            <image src="../../images/searching.png" />
-        </i-grid-icon>
-        <i-grid-label>上报电信</i-grid-label>
-    </i-grid-item>
-    <!-- <i-grid-item>
-        <i-grid-icon>
-            <image src="../../images/ludan.png" />
-        </i-grid-icon>
-        <i-grid-label>开网录单</i-grid-label>
-    </i-grid-item> -->
-    <!-- <i-grid-item>Grid</i-grid-item>
-    <i-grid-item>Grid</i-grid-item> -->
-</i-grid>
-   <!-- <view class='btnGroup'>
-    <view class='item'>
-      <image class='icon' src='../../images/home.png'></image>
-      电信查询
+<view class='cu-custom cu-bar fixed bg-gradual-green' style="height:{{CustomBar*2}}rpx;">
+  <view class="cu-bar fixed bg-shadeTop" style="padding-top:{{statusBarHeight*2+10*2}}rpx">
+    <view style='color:#fff;font-size:40rpx;margin-left:40rpx;'>故障列表</view>
+  </view>
+</view>
+<!-- //轮播 -->
+<!-- <swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+  <swiper-item wx:for="{{4}}" wx:key>
+    <image src="https://image.weilanwl.com/img/4x3-{{index+1}}.jpg" mode='aspectFill'></image>
+  </swiper-item>
+</swiper> -->
+<view class="VerticalBox" style='padding-top:{{CustomBar}}px'>
+  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 190rpx)">
+    <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{room}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+      {{item.title}}栋
     </view>
-    <view class='item'>
-    <image class='icon' src='../../images/home.png'></image>
-      锐捷查询
+  </scroll-view>
+  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 148rpx)" scroll-into-view="main-id-{{TabCur}}" bindscroll="VerticalMain" >
+   
+  <view class='cu-list menu menu-avatar' style='margin-left:5px;' wx:if="{{faultStatus == 2}}">
+    <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}"  wx:for="{{faultData}}" wx:key id="main-id-{{index}}"bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}" style='padding:10px;animation:show 1.4s 1;-webkit-animation:show 1.4s 1;'>
+
+      <view class='content'>
+        <view class='text-grey text-l'>{{item.floor}}{{item.room}} | {{item.student_name}}</view>
+        <view class='text-gray text-m'>
+          <text class='icon-infofill text-red'></text> {{item.fault_description}}</view>
+      </view>
+      <view class='action'>
+        <!-- <view class='text-grey text-xs text-cut'>{{item.reporting_time}}</view> -->
+      </view>
+      <view class='move'>
+        <view class='bg-grey' data-user="{{item.student_number}}" data-userName="{{item.student_name}}" data-faultId="{{item.fault_id}}" data-faultTime="{{item.reporting_time}}" bindtap='getUserFault'>详情</view>
+        <view class="bg-red" data-faultid="{{item.fault_id}}" bindtap='checkDelFault'>删除</view>
+      </view>
+      
     </view>
-    <view class='item end'>
-    <image class='icon' src='../../images/home.png'></image>
-      电信查询
+  </view>
+  </scroll-view>
+  
+</view>
+<view class="cu-modal {{modalName=='delModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="bg-img" style="background-image: url('https://nic.fhyiii.cn/images/one.jpg');height:200px;">
+      <view class="cu-bar justify-end text-block">
+        <view class='action' bindtap='hideModal'>
+          <text class='icon-close '></text>
+        </view>
+      </view>
     </view>
-  </view> -->
+    <view class="cu-bar bg-white">
+      <view class='action margin-0 flex-sub  solid-left text-red' bindtap='delFault' wx:if="{{user_floor == user.floor && user.level > 1 || user.level == 4}}" >确定删除</view>
+      <view wx:else class='action margin-0 flex-sub  solid-left text-red'>
+        你无权删除
+      </view>
+    </view>
+  </view>
+</view>

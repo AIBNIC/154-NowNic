@@ -29,7 +29,7 @@
   <i-load-more tip="我是有底线的" loading="{{ false }}" />
 </view> -->
 <form bind:submit="tijiao" report-submit="true">
-<view class="page">
+<view class="page web-font">
 <wux-toptips id="wux-toptips" />
 <!-- <i-toast id="toast" /> -->
     <view class="page__bd">

@@ -8,17 +8,21 @@
     "pages/searchStu/searchStu",
     "pages/ludan/ludan",
     "pages/updx/updx",
+    "pages/qqmap/qqmap",
     "pages/upfault/upfault",
     "pages/applist/applist",
     "pages/worktable/worktable",
     "pages/faultInfo/faultInfo",
+    "pages/about/about",
+    "pages/error/error",
     "pages/logs/logs"
   ],
   "window":{
     "backgroundTextStyle":"dark",
-    "navigationBarBackgroundColor": "#000",
-    "navigationBarTitleText": "NIC",
-    "navigationBarTextStyle":"white"
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "NIC网络中心",
+    "navigationBarTextStyle":"black",
+    "navigationStyle": "default"
   },
   "networkTimeout":{
     "request": 20000, 
@@ -26,21 +30,35 @@
     "downloadFile": 20000
   },
   "tabBar": {
-    "selectedColor": "#666",
+    "color": "#8a8a8a", 
+    "borderStyle": "white", 
+    "selectedColor": "black",
+    "backgroundColor": "#ffffff", 
     "list": [
       {
         "pagePath": "pages/fault/fault",
         "text": "故障",
-        "iconPath": "images/home_active.png",
-        "selectedIconPath": "images/home.png"
+        "iconPath": "images/bar chart.png",
+        "selectedIconPath": "images/bar chart1.png"
+      },
+      {
+        "pagePath": "pages/applist/applist",
+        "text": "应用",
+        "iconPath": "images/gz.png",
+        "selectedIconPath": "images/gza.png"
       },
       {
         "pagePath": "pages/usercenter/usercenter",
-        "text": "应用",
+        "text": "我的",
         "iconPath": "images/my-active.png",
         "selectedIconPath": "images/my.png"
       }
     ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   }
 }
 

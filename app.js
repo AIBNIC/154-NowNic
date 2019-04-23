@@ -2,7 +2,7 @@
 
 App({
   // 判断返回的数据错误码提示
-  
+
   errorMessge: function (error) {
     if (error === ('10001')) {
       wx.showToast({
@@ -119,6 +119,13 @@ App({
       })
     }
   },
+  globalData: {
+    statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
+    user:"",
+  },
+
+  
+
   prompt: function (msg) {
     wx.showModal({
       title: msg,
@@ -126,17 +133,12 @@ App({
       showCancel:false
     })
   },
-  onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
+  update:function(){
     const updateManager = wx.getUpdateManager()
 
     updateManager.onCheckForUpdate(function (res) {
       // 请求完新版本信息的回调
-      console.log("新版本信息的回调"+res.hasUpdate)
+      console.log("新版本" + res.hasUpdate)
     })
 
     updateManager.onUpdateReady(function () {
@@ -162,10 +164,94 @@ App({
       })
     })
   },
+  //定时任务，每隔二十分钟刷新session 
+  refresh:function(){
+    var that = this;
+    setInterval(that.login,20* 60 * 1000);
+  },
+  login: function (user_number, user_password){
+    console.log('app-login')
+    
+    var that = this;
+    var check;
+    wx.request({
+      url: 'https://nic.fhyiii.cn/wxcx/public/index/log_login',
+      method: 'POST',
+      dataType: 'json',
+      data: {
+        xuehao: user_number,
+        password: user_password,
+      },
+      success: function (res) {
+        if (res && res.header && res.header['Set-Cookie']) {
+          wx.setStorageSync('SessionId', res.data.SessionId);//保存Cookie到Storage
+        }
+        if (res.data.success) {
+          // console.log(res.data)
+        } else {
+          wx.clearStorageSync();
+          wx.redirectTo({
+            url: '../login/login',
+          })
+        }
+      },
+      error: function (error) {
+        console.log(error)
+      }
+
+    })
+  },
+  onLaunch: function () {
+    //获取字体
+    wx.loadFontFace({
+      family: 'webfont',
+      source: 'url("//at.alicdn.com/t/webfont_1f7b3qbimiv.eot")',
+      success: function (res) {
+        console.log(res.status) //  loaded
+      },
+      fail: function (res) {
+        // console.log(res.status) //  error
+      },
+      complete: function (res) {
+        // console.log(res.status);
+      }
+    })
+    // this.checkLogin();
+    this.refresh(); //定时任务
+    this.update();  //更新软件
+
+    var wx_user = wx.getStorageSync('wx_user')
+    this.login(wx_user.user_number, wx_user.user_password)
+
+    wx.getSystemInfo({
+      success: e => {
+        this.globalData.StatusBar = wx.getSystemInfoSync()['statusBarHeight'];
+        let custom = wx.getMenuButtonBoundingClientRect();
+        this.globalData.Custom = custom;
+        this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
+      }
+    })
+
+    // var checkLogin = this.checkLogin()
+    // console.log(checkLogin)
+
+    // if (checkLogin){
+    //   this.globalData.user = this.checkLogin()
+    //   this.login(this.globalData.user.user_number, this.globalData.user.user_password)
+    // }
+    // console.log(this.globalData)
+
+    // 展示本地存储能力
+    var logs = wx.getStorageSync('logs') || []
+    logs.unshift(Date.now())
+    wx.setStorageSync('logs', logs)
+  
+    
+  },
   
   // 获取缓存里的用户信息,返回值是json格式的用户信息
   getLocaStroage: function(){
-    console.log('app使用获取缓存')
+    console.log('调用app获取缓存')
     try {
       var name = wx.getStorageSync('user_name')
       var password = wx.getStorageSync('user_password')
@@ -173,75 +259,96 @@ App({
       var student = wx.getStorageSync('user_number')
       var identity = wx.getStorageSync('user_identity')
       var state = wx.getStorageSync('user_state')
+      var wx_name = wx.getStorageSync('wx_name')
+      var wx_img = wx.getStorageSync('wx_img')
+      var level = wx.getStorageSync('level')
       var user = {
         name: name,
         password: password,
         floor: floor,
         student: student,
         identity: identity,
-        state: state
+        state: state,
+        wx_name: wx_name,
+        wx_img: wx_img,
+        level: level
       }
       return user
+      console.log(user)
     } catch (e) { 
       console.log(e)
     }
   },
+  
   // 判断用户是否登录
   checkLogin: function () {
-    console.log('判断用户是否登录开始')
+    console.log('调用app判断用户是否登录checkLogin')
     var that = this;
     wx.login({
       success: function (res) {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         wx.setStorageSync('code', res.code)
-        var user_number = wx.getStorageSync('user_number')
         if (res.code) {
           wx.request({
-            url: 'https://nic.fhyiii.cn/nic/xiaocx/get_openid.php', //改成你服务端的方法
+            url: 'https://nic.fhyiii.cn/wxcx/public/index/getOpenid', //改成你服务端的方法
             header: { "Content-Type": "application/x-www-form-urlencoded" },
             dataType: "json",
             method: 'POST',
             data: {
-              code: res.code,
-              user_number: user_number
+              'code': res.code,
             },
             success: function (res) {
-              // console.log(res)
-              //如果是首次登录，会跳到授权页面
-              if (res.data == 'error' || res.data == 'false' ) {
-                // wx.clearStorage()
-                wx.setStorageSync('user_state', 'false')
-                console.log('判断用户失败');
-              } else {//o1RnE5H7yD9xqp-dKtj9R1M20GYg
-                wx.setStorageSync('user_name', res.data.user_name)
-                wx.setStorageSync('user_number', res.data.user_number)
-                wx.setStorageSync('user_password', res.data.user_password)
-                wx.setStorageSync('user_floor', res.data.user_floor)
-                wx.setStorageSync('user_identity', res.data.user_identity)
-                wx.setStorageSync('user_state', res.data.wx_check)
-                wx.setStorageSync('openid', res.data.wx_openid)
-                console.log('判断用户成功');
+              if (res && res.header && res.header['Set-Cookie']) {
+                wx.setStorageSync('SessionId', res.data.SessionId);//保存Cookie到Storage
               }
+              if (res.data.success) {
+                // console.log(res.data)
+                wx.setStorageSync('wx_user', res.data.msg)
+                wx.setStorageSync('user_name', res.data.msg.user_name)
+                wx.setStorageSync('user_number', res.data.msg.user_number)
+                wx.setStorageSync('user_password', res.data.msg.user_password)
+                wx.setStorageSync('user_floor', res.data.msg.user_floor)
+                wx.setStorageSync('user_identity', res.data.msg.user_identity)
+                wx.setStorageSync('user_state', res.data.msg.wx_check)
+                wx.setStorageSync('openid', res.data.msg.wx_openid)
+                wx.setStorageSync('wx_name', res.data.msg.wx_name)
+                wx.setStorageSync('wx_img', res.data.msg.wx_img)
+                wx.setStorageSync('level', res.data.msg.level)
+                // console.log(res.data.msg)
+
+                // if (res.data.msg.wx_img == '') {
+                //   console.log('调用app没有授权')
+                //   wx.redirectTo({
+                //     url: '../login/login',
+                //   })
+                // }
+                console.log('调用app判断用户成功');
+              }else{
+                wx.clearStorageSync();
+                // wx.redirectTo({
+                //   url: '../login/login',
+                // })
+              }
+              
             }
           })
         } else {
-          console.log('获取用户登录态失败！' + res.errMsg)
+          console.log('调用app获取用户登录态失败！' + res.errMsg)
         }
       }
     })
-    var user_state = wx.getStorageSync('user_state')
-    // console.log(user_state)
-    if (user_state == 'false') {
-      wx.redirectTo({
-        url: '../login/login',
-        success: function () {
-          wx.clearStorage()
-        }
-      })
-      return false;
-    } 
-    if (user_state == 1) {
-      return true;
-    } 
+    // var user_state = wx.getStorageSync('user_state')
+    // if (!user_state) {
+    //   wx.redirectTo({
+    //     url: 'pages/login/login',
+    //     success: function () {
+    //       wx.clearStorage()
+    //     }
+    //   })
+    //   return false;
+    // } 
+    var wx_user = wx.getStorageSync('wx_user')
+    that.globalData.user = wx_user
+    // console.log(that.globalData)
   }
 })

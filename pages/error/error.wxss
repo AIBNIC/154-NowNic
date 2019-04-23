@@ -1,0 +1,6 @@
+/* pages/error/error.wxss */
+.login-title {
+  font-size: 60rpx;
+  text-align: center;
+  padding-top: 60rpx;
+}

@@ -2,10 +2,12 @@
 .container {
   padding: 0;
   font-size: 38rpx;
-  font-family: "宋体";
+  font-family: "微软雅黑";
 }
 .user-item {
   margin-top: 20px;
+  width:90%;
+
 }
 
 .user-no {
@@ -15,9 +17,19 @@
 
 .info-item {
   position: relative;
-  padding: 10rpx;
+  display: block;
+  /* height: 20px; */
+  /* padding: 10rpx; */
   border: 1px solid #bbb;
   border-bottom: none;
+}
+
+.info-item label{
+  min-width: 21%;
+  padding: 10rpx;
+  /* border: 1px solid red; */
+  display:inline-block;
+  text-align: center;
 }
 
 .info-item:last-child {
@@ -33,15 +45,17 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100rpx;
+  width: 26%;
   border-right: 1px solid #bbb;
   text-align: center;
   line-height:65rpx;
 }
 
 .info-item text:nth-child(2) {
-  width: 500rpx;
-  padding-left: 100rpx;
+  width: 73%;
+  /* border: 1px solid #bbb; */
+  display: inline-block;
+  /* padding-left: 100rpx; */
   text-align: center;
 }
 

@@ -1,13 +1,30 @@
-<view class="content">
-  <view class="head clearfix">
-    <view class="head-logo">
-      <!-- <image class="head-img" src="../images/login.png"></image> -->
-      <open-data class="head-img" type="userAvatarUrl"></open-data>
-    </view>
-    <view class='info'>
-      <span class='info_text'><open-data type="userNickName"></open-data></span>
-      <view class='head-text'>UID：{{user.name}} | Floor：{{user.floor}}栋</view>
-    </view>
+<!-- <view style="width:100%;padding-top:{{statusBarHeight+3}}px;position: absolute;top:0px;height:160rpx;background:#fff;z-index:100;">
+  <official-account style=""></official-account>
+</view> -->
+<view class="content web-font">
+  <view class="head clearfix"  style="padding-top:{{statusBarHeight+40}}px">
+  <view class='my' style='top:{{statusBarHeight+8}}px'>我的</view>
+    <!-- <view class='info_head'>
+      
+    </view> -->
+    <view class="head-logo" wx:if="{{user.wx_img}}">
+        <image class="head-img" src="{{user.wx_img}}"></image>
+        <!-- <open-data class="head-img" type="userAvatarUrl"></open-data> -->
+      </view>
+      <view wx:else class="head-logo">
+        <button open-type='getUserInfo' bindgetuserinfo="getUserinfo" style='background:url("https://nic.fhyiii.cn/head.png");background-size:140rpx;width:100%;height:100%;'></button>
+        <!-- <open-data class="head-img" type="userAvatarUrl"></open-data> -->
+      </view>
+
+      <view class='info'>
+        <!-- <span class='info_text'><open-data type="userNickName"></open-data></span> -->
+        <span class='info_text' wx:if="{{user.wx_name}}">{{user.wx_name}}</span>
+        <span class='info_text' wx:else>点击头像授权</span>
+        <!-- <span class='info_text' wx:else><open-data type="userNickName"></open-data></span> -->
+        <view class='head-text'>UID：{{user.user_name}} [{{user.user_identity}}] {{user.user_floor}}栋</view>
+        <!-- <view>Floor：{{user.user_floor}}栋</view> -->
+      </view>
+    <image src='https://image.weilanwl.com/gif/wave.gif' mode='scaleToFill' class='gif-black response' style='height:64rpx;mix-blend-mode:screen'></image>
       <image src='../../images/999.png' class='head-image'></image>
     <!-- <view class="head-right">
       <view>
@@ -21,12 +38,12 @@
       </view>
     </view> -->
   </view>
-  <view class="option">
+  <view class="option" wx:if="{{user.level>0}}">
     <!-- <view class="btns">
       <button class="btn" bindtap="amendDs">修改栋数</button>
     </view> -->
-    <view class="btns">
-      <view wx:if="{{user.name == '吴佩婷' || user.name == '方宏毅' }}">
+    <!-- <view class="btns">
+      <view wx:if="{{user.name == '吴佩婷'}}">
       <i-swipeout  i-class="i-swipeout-demo-item" actions="{{actions}}" class='swipeout'>
         <view slot="content">
           <button class="btn1" bindtap=""><image src='../../images/dogd.png' class='btns-img'></image>
@@ -35,62 +52,94 @@
         </view>
       </i-swipeout>
       </view>
-    </view>
-    <view class="btns">
-      <button class="btn" bindtap="worktable"><image src='../../images/txl.png' class='btns-img'></image>
-       通讯录
+    </view> -->
+    <!-- <view class="cu-list grid col-4 no-border">
+      <view class="cu-item" >
+        <view class='icon-cardboardfill text-red text-{{item.color}}'>
+          <view class="cu-tag badge" >
+            <block >99</block>
+          </view>
+        </view>
+        <text>VR</text>
+      </view>
+    </view> -->
+    <view class="btns" wx:if="{{user.level>3}}">
+      <button class="btn" bindtap="worktable" >
+      <image src='../../images/txl.png' class='btns-img'></image>
+       <view class='btns_text'>值班表</view>
       </button>
     </view>
-    <view class="btns">
+    <view class="btns" wx:if="{{user.level>2}}">
+      <button class="btn" bindtap="searchStu"><image src='../../images/search.png' class='btns-img'></image>
+      <view class='btns_text'>用户查询</view>
+      </button>
+    </view>
+    <view class="btns" wx:if="{{user.level>2}}">
       <button class="btn" bindtap="searchdx"><image src='../../images/chahf.png' class='btns-img'></image>
-       电信查询
+      <view class='btns_text'>电信查询</view>
+       
       </button>
     </view>
-    <view class="btns">
-      <button class="btn" bindtap="searchStu"><image src='../../images/loupe.png' class='btns-img'></image>
-       用户查询
-      </button>
-    </view>
-     <view class="btns">
-      <button class="btn" bindtap="updx"><image src='../../images/searching.png' class='btns-img'></image>
-       上报电信
-      </button>
-    </view>
-  
-    <view class="btns">
+     <view class="btns" wx:if="{{user.level>0}}">
       <button class="btn" bindtap="goLoggingData"><image src='../../images/ludan.png' class='btns-img'></image>
-       开网录单
+      <view class='btns_text'>开网录单</view>
+       
       </button>
     </view>
-    <view class="btns">
-    <button class="btn" bindtap="amendPassword"><image src='../../images/update.png' class='btns-img'></image>
-       修改密码
+     <view class="btns" wx:if="{{user.level>0}}">
+      <button class="btn" bindtap="updx"><image src='../../images/searching.png' class='btns-img'></image>
+      <view class='btns_text'>上报电信</view>
+       
       </button>
     </view>
-    <view class="btns">
-    <button class="btn" bindtap="FingerPrint"><image src='../../images/update.png' class='btns-img'></image>
-       录入指纹
+    <view class="btns" wx:if="{{user.level>0}}">
+    <button class="btn" bindtap="amendPassword"><image src='../../images/set.png' class='btns-img'></image>
+     <view class='btns_text'>修改密码</view>
       </button>
     </view>
-    
+    <view class="btns" wx:if="{{user.level>0}}">
+    <button class="btn" bindtap="FingerPrint"><image src='../../images/hand.png' class='btns-img'></image>
+    <view class='btns_text'>录入指纹</view>
+      </button>
+    </view>
+    <view class="btns" wx:if="{{user.level>0}}">
+      <button class="btn" bindtap="clearLocaStroage"><image src='../../images/exit.png' class='btns-img'></image>
+      <view class='btns_text'>退出登录</view>
+        </button>
+    </view>
+    <!-- <view class="btns" wx:if="{{user.level>0}}">
+      <button class="btn" bindtap="about"><image src='../../images/about.png' class='' style='width:60rpx;height:60rpx;'></image>
+      <view class='btns_text'>关于</view> 
+        </button>
+    </view> -->
+    <!-- <view class="btns" wx:if="{{user.level>0}}">
+      <button class="btn" bindtap="qqmap"><image src='../../images/exit.png' class='btns-img'></image>
+      <view class='btns_text'>地图</view>
+        </button>
+    </view> -->
     <!-- <view class="btns">
       <button class="btn" bindtap="goLoggingData">开网录入</button>
     </view> -->
     <!-- <view class="btns">
       <button class="btn" bindtap="updateNic"><image src='../../images/update.png' class='btns-img'></image>更新版本</button>
     </view> -->
-    <view class="btns">
+    <!-- <view class="btns">
       <button class="btn" bindtap="clearLocaStroage" style='text-align:center;text-indent:0;'>退出登录</button>
-    </view>
+    </view> -->
+  </view>
+  <i-load-more tip="© 2018-2019 Designed by FHYI " loading="{{ false }}" style="color:#ddd;" bindtap="about"/>
+  <view style="width:100%;height:160rpx;background:rgba(150, 150, 150, 0.089);z-index:100;margin-top:-36rpx;">
+    <official-account style="rgba(150, 150, 150, 0.089);"></official-account>
   </view>
   <modal hidden="{{hiddenmodalput}}" title="修改密码" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="checkPass">
     <input type='text' placeholder="请输入密码" bindinput="setNewPass" bindblur="setNewPass"></input>
   </modal>
-  <modal hidden="{{hiddenmodalDs}}" title="修改栋数" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="checkDs">
+  <!-- <modal hidden="{{hiddenmodalDs}}" title="修改栋数" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="checkDs">
     <picker bindchange="bindPickerChange" value="{{dsIndex}}" range="{{dsArray}}">
       <view class="picker">
         当前选择：{{dsArray[dsIndex]}}
       </view>
     </picker>
-  </modal>
+  </modal> -->
 </view>
+

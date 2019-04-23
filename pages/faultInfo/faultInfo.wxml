@@ -1,45 +1,70 @@
 <view class="container" >
   <view class="user-item">
     <view class="info-item">
-      <text>学号</text><text>{{student}}</text>
+      <label>学号</label>
+      <text>{{student}}</text>
     </view>
     <view class="info-item">
-      <text>姓名</text><text>{{name}}</text>
+      <label>姓名</label>
+      <text>{{name}}</text>
     </view>
-    <view class="info-item" wx:if="{{user.mac}}">
-      <text>MAC</text><text>{{user.mac}}</text>
+    <view class="info-item" wx:if="{{user.idcard}}">
+      <label>身份证</label><text>{{user.idcard}}</text>
     </view>
     <view class="info-item" wx:if="{{user.ip}}">
       <text>IP</text><text>{{user.ip}}</text>
     </view>
     <view class="info-item">
-      <text>状态</text>
+      <label>安朗状态</label>
       <text wx:if="{{user.status}}">在线</text>
       <text wx:else>不在线</text>
     </view>
+    <!-- <view class="info-item" wx:if="{{dx[0].user_speed}}">
+      <label>电信速率</label>
+      <text>{{dx[0].user_speed}} {{dx[0].user_state}}</text>
+    </view> -->
+    <view class="info-item" wx:if="{{dx.user_number}}">
+      <label>电信8M</label>
+      <text>{{dx.user_number}} {{dx.user_state}}</text>
+    </view>
+     <!-- <view class="info-item" wx:if="{{dx1[0].user_speed}}">
+      <label>电信速率</label>
+      <text>{{dx1[0].user_speed}} {{dx1[0].user_state}}</text>
+    </view> -->
+    <view class="info-item" wx:if="{{dx1.user_number}}">
+      <label>电信2M</label>
+      <text>{{dx1.user_number}} {{dx1.user_state}}</text>
+    </view>
+     <view class="info-item">
+      <label>上报时间</label>
+      <text>{{time}}</text>
+    </view>
   </view>
-  <view class="btns" wx:if="{{!tip || newuser}}">
-    <i-button bind:click="handleClick" type="primary" size="small" class='btns_btn' data-student="{{student}}" data-fault="{{fault_id}}" bindtap="getFault" wx:if="{{!tip}}">接单</i-button>
-    <i-button bind:click="handleClick" type="error" size="small" class='btns_btn' data-student="{{student}}" data-fault="{{fault_id}}" bindtap="successFault" wx:if="{{!checksuccess && newuser}}">完成</i-button>
+  <!-- <view class="btns" wx:if="{{!tip || newuser }}">
+    <button class='cu-btn round lines-black' data-student="{{student}}" data-fault="{{fault_id}}" bindtap="getFault" wx:if="{{!tip}}">接单</button>
+    <button class='cu-btn round lines-red' data-student="{{student}}" data-fault="{{fault_id}}" bindtap="successFault" wx:if="{{!checksuccess && newuser}}">完成</button> -->
+    <!-- <i-button bind:click="handleClick" type="primary" size="small" class='btns_btn' data-student="{{student}}" data-fault="{{fault_id}}" bindtap="getFault" wx:if="{{!tip}}">接单</i-button> -->
+    <!-- <i-button bind:click="handleClick" type="error" size="small" class='btns_btn' data-student="{{student}}" data-fault="{{fault_id}}" bindtap="successFault" wx:if="{{!checksuccess && newuser}}">完成</i-button> -->
     
     <!-- <button data-student="{{user.student}}" data-fault="{{fault_id}}" bindtap="getFault">接单</button>
     <button data-student="{{user.student}}" data-fault="{{fault_id}}" bindtap="getFault">完成</button> -->
     <!-- <button data-student="{{user.student}}" class="btn-clear" bindtap="clearUserInfo">清除在线与绑定</button> -->
-  </view> 
+  <!-- </view>  -->
 </view>
- <view class="container" wx:if="{{userNoExist}}">
+ <!-- <view class="container" wx:if="{{userNoExist}}">
   <view class="user-no">
     <text>用户未开通锐捷</text>
   </view>
-</view> 
+</view>  -->
 <i-spin fix wx:if="{{loading}}"></i-spin>
-<view wx:if="{{tip && !newuser}}" style='text-align:center;margin:40rpx 0 ;font-size:50rpx;'>
+<!-- <view wx:if="{{tip && !newuser}}" style='text-align:center;margin:40rpx 0 ;font-size:50rpx;'>
   <text>此单已被人抢了，晚了一步~</text>
-</view>
+</view> -->
+
 <!-- <view wx:if="{{checksuccess}}" style='text-align:center;margin:40rpx 0 ;font-size:50rpx;'>
   <text>此单已完成辛苦了</text>
 </view> -->
 
-<view wx:for="{{images}}" class='pic'>
+<!-- <view wx:for="{{images}}" class='pic'>
   <image src='{{item}}' bindtap='handleImagePreview'></image>
-</view>
+</view> -->

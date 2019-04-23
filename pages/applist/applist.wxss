@@ -1,30 +1,55 @@
-/* pages/applist/applist.wxss */
-.container{
-  font-family: 'Microsoft YaHei';
-  font-weight: lighter;
+/* pages/component/nav/nav.wxss */
+page{
+  height: 100%;
 }
-.btnGroup{
-  width: 90%;
-  /* height: 100%; */
-  display: flex;
-  flex-direction: row;
-  margin-top:30rpx; 
+.VerticalNav.nav {
+  width: 200rpx;
+  white-space: initial;
 }
-.item{
-  display: inline-block;
-  border: 1px solid #ddd;
-  width: 35%;
-  margin-right: 30rpx;
-  padding: 10rpx;
+
+.VerticalNav.nav .cu-item {
+  width: 75%;
   text-align: center;
-  font-size: 32rpx;
+  background-color: #fff;
+  margin: 0;
+  border: none;
+  height: 50px;
+  position: relative;
 }
-.icon{
+
+.VerticalNav.nav .cu-item.cur {
+  background-color: #f1f1f1;
+}
+.VerticalNav.nav .cu-item.cur::after {
+  content: "";
+  width: 8rpx;
+  height: 30rpx;
+  border-radius: 10rpx 0 0 10rpx;
+  position: absolute;
+  background-color: currentColor;
+  top: 0;
+  right: 0rpx;
+  bottom: 0;
+  margin: auto;
+}
+.VerticalBox{
+  display: flex;
+}
+.VerticalMain{
+  background-color: #f1f1f1;
+}
+
+.fault_time{
+  height: 30px;
+  width: 195rpx;
+  float: right;
+}
+
+/* 清除浮动 */
+.fault_time_view::after{
   display: block;
-  width: 120rpx;
-  height: 120rpx;
-  margin: 20rpx 30rpx;
-}
-.end{
-  margin-right: 0;
+  height: 0;
+  clear:both;
+  content:'';
+  background: #fff;
 }

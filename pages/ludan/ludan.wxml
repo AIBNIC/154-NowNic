@@ -1,6 +1,6 @@
 <!--pages/ludan/ludan.wxml-->
 <form bind:submit="tijiao" report-submit="true">
-<view class='container'>
+<view class='container web-font'>
   <view class='title'>
     <!-- <b>网络中心开网录入</b> -->
   </view>
@@ -36,7 +36,7 @@
   </view>
   <view class='item'>
     <label>意向单号：</label>
-    <input type='number' placeholder="2M要！！8M不用意向单号" bindinput="danhao_input"  value='{{empty}}'></input>
+    <input type='number' placeholder="意向单号（2M）" bindinput="danhao_input"  value='{{empty}}'></input>
   </view>
   <view class='item'>
     <picker bindchange="bindPickerChange" value="{{tc_index}}" range="{{objectArray}}" range-key="{{'name'}}" >

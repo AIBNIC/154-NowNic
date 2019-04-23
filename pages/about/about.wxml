@@ -1,0 +1,10 @@
+<!--pages/about/about.wxml-->
+<view class='connect web-font'>
+  <view>AIB网络中心</view>
+  <view>希望可以让你们的路变得更平坦</view>
+  <view>希望通往成功的路更直接</view>
+  <view>愿多年以后</view>
+  <view>感谢现在的 自己</view>
+  <image src='{{images[0]}}' style='width:60%;' bindtap='handleImagePreview'></image>
+</view>
+<view class='footer'>© 2018-2019 Designed by FHYI</view>

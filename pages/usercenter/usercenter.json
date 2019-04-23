@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "i-swipeout": "../../dist/swipeout/index"
+    "i-swipeout": "../../dist/swipeout/index",
+    "i-load-more": "../../dist/load-more/index"
   },
-  "navigationBarTitleText": "个人信息"
+  "navigationStyle": "custom"
 }

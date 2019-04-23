@@ -1,7 +1,7 @@
 <!--pages/worktable/worktable.wxml-->
-<view class='container'>
+<view class='container web-font'>
   <view class="page">
-    <view style='font-size:16pt;text-align:center;margin:10px auto;'>通讯录</view>
+    <!-- <view style='font-size:16pt;text-align:center;margin:10px auto;'>通讯录</view> -->
     <view class="page__bd" >
         <view bindtap='' data-tel='' class='telphone' style='border-right:1px solid #ddd;'>13栋</view>
         <view bindtap='tel' data-tel='18127309306' class='telphone'>谭荣健</view>
@@ -55,8 +55,9 @@
         <view bindtap='' data-tel='' class='telphone' style='border-right:1px solid #ddd;'>2526</view>
         <view bindtap='tel' data-tel='13246000046' class='telphone'>张水生</view>
         <view bindtap='tel' data-tel='13539264111' class='telphone'>罗铎</view>
-        <view bindtap='tel' data-tel='18898501720' class='telphone'>杨小莹</view>
+        <!-- <view bindtap='tel' data-tel='18898501720' class='telphone'>杨小莹</view> -->
         <view bindtap='tel' data-tel='13682766825' class='telphone'>吴乐琴</view>
+        <view bindtap='' data-tel='' class='telphone'></view>
     </view>
     <view class="page__bd" >
         <view bindtap='' data-tel='' class='telphone' style='border-right:1px solid #ddd;'>27栋</view>
@@ -67,6 +68,14 @@
     </view>
   </view>
 </view>
-<view>
-  <image src='https://nic.fhyiii.cn/table.jpg' class='table_img'></image>
-</view> 
+<view style='font-size:16px;text-align:center;margin:10px auto;'>点击图片放大</view>
+<!-- <view wx:for="{{images}}" >
+  <image src='{{item}}' bindtap='handleImagePreview' class='table_img'></image>
+</view> -->
+
+<image src='{{images[0]}}' bindtap='handleImagePreview' class='table_img' data-id='0'></image>
+<image src='{{images[1]}}' bindtap='handleImagePreview' class='table_img' data-id='1'></image>
+<!-- <view>
+  <image src='https://nic.fhyiii.cn/table.jpg' class='table_img' bindtap='handleImagePreview'></image>
+  <image src='https://nic.fhyiii.cn/smalltable.png' class='table_img' bindtap='handleImagePreview'></image>
+</view>  -->

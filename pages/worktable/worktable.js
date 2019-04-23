@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    img:''
+    img:'',
+    images: [
+      "https://nic.fhyiii.cn/images/one.jpg","https://nic.fhyiii.cn/images/two.jpg"]
   },
   tel:function(e){
     console.log(e)
@@ -35,7 +37,16 @@ Page({
    
   },
 
-  
+  //显示图片
+  handleImagePreview(e) {
+    console.log(e)
+    const idx = e.target.dataset.id
+    const images = this.data.images
+    wx.previewImage({
+      current: images[idx],  //当前预览的图片
+      urls: images,  //所有要预览的图片
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -88,7 +99,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

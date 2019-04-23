@@ -1,6 +1,6 @@
 .content{
   font-family: 'Microsoft YaHei','Simsun';
-  font-weight: lighter;
+  /* font-weight: lighter; */
 }
 
 .h1{
@@ -16,13 +16,19 @@
 .search{
   width: 78%;
 }
-.search-btn{
+#search-btn{
   /* font-size: 100%; */
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
   font-family: 'Microsoft YaHei','Simsun';
-  font-weight: lighter;
+  /* font-weight: lighter; */
   outline: none;
+  border: 1px solid #ddd;
   border-radius: 13rpx;
-  font-size:40rpx;
+  font-size:35rpx;
   background: #fff;
   
 }
@@ -60,7 +66,7 @@
   color: #000;
 }
 .searchcion {
-  margin: 10rpx 10rpx 10rpx 10rpx;
+  margin: 10rpx 10rpx 10rpx 20rpx;
   position: absolute;
   left:25rpx;
   z-index: 2;

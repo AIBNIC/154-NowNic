@@ -1,0 +1,17 @@
+/* pages/about/about.wxss */
+.connect{
+  width: 100%;
+  /* border:1px solid red; */
+  text-align: center;
+}
+.connect view{
+  margin: 50rpx 0;
+  font-size: 30rpx;
+  font-weight: bold;
+  font-family: "Microsoft YaHei";
+  color: rgb(80, 80, 80);
+}
+.footer{
+  margin-top: 10%;
+  text-align: center;
+}

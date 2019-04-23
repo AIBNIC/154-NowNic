@@ -1,8 +1,9 @@
 /* pages/usercenter/usercenter.wxss */
 page {
   font-size: 38rpx;
+  height: 100%;
   font-family: "Microsoft YaHei";
-  background: #eee;
+  background: rgba(150, 150, 150, 0.089);
 }
 
 .clearfix:after {
@@ -18,13 +19,31 @@ page {
   /* padding: 10px 0; */
 }
 
+.my{
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  position: absolute;
+  left: 20px;
+  /* display:  */
+}
+.info_head{
+  width: 94%;
+  margin: 5px  auto;
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  height: 280rpx;
+  color: #000;
+  box-shadow: 1px 5px 5px #ddd;
+}
 .head {
-  height: 310rpx;
+  height: 280rpx;
 }
 .head-image{
   display: block;
   width:100%;
-  height: 310rpx;
+  height:360rpx;
   padding:0;
   position: absolute;
   top: 0;
@@ -35,17 +54,21 @@ page {
   float: left;
   display: inline-block;
   margin-left: 70rpx;
-  margin-top: 50rpx;
-  width: 170rpx;
-  height: 170rpx;
+  margin-top: 73rpx;
+  width: 130rpx;
+  height: 130rpx;
   border-radius: 100%;
   overflow: hidden;
   z-index: 99;
 }
+.head-img{
+  width: 100%;
+  height: 100%;
+}
 .head-text{
-  font-size: 12px;
-  color: rgba(255, 255, 255, .7);
-  /* color: #fff;0 */
+  font-size: 14px;
+  /* color: rgba(255, 255, 255, .7); */
+  color: #fff;
   /* text-align: center; */
   margin-top: 30rpx;
   display: block;
@@ -58,26 +81,44 @@ page {
 .info{
   width: 200px;
   display: block;
-  margin: 80rpx 0 0 50rpx;
+  margin: 80rpx 0 0 60rpx;
   float: left;
  
 }
 .info_text{
+  font-size: 20px;
   color: #fff;
 }
+.option{
+  width: 94%;
+  background: #fff;
+  margin: 56rpx auto;
+  /* margin-top: 30px; */
+  padding: 20rpx 0;
+  border-radius: 10px;
+  box-shadow: 1px 5px 5px #ddd;
+}
 .btns {
-  margin-top: 20rpx;
+  width:23%;
+  padding:7rpx;
+  /* height: 100rpx; */
+  /* margin-top: 20rpx; */
+  /* margin: 20rpx; */
+  display: inline-block;
+}
+.btns_text{
+  font-size: 25rpx;
+  color:#888;
   display: block;
 }
-
 .btn,.btn1 {
   color: #222;
-  text-align: left;
-  text-indent: 40rpx;
+  /* text-align: left; */
+  /* text-indent: 40rpx; */
   background: #fff;
   border-radius: 0;
-  line-height: 50px;
-  font-size: 15px;
+  /* line-height: 50px; */
+  /* font-size: 15px; */
   /* float: left; */
 }
 
@@ -85,11 +126,12 @@ page {
   display: none;
 }
 .btns-img{
-  width: 30px;
-  height: 30px;
+  width: 100rpx;
+  height: 100rpx;
   /* position: absolute; */
-  float: left;
-  margin: 10px 0;
+  /* float: left; */
+  display: block;
+  /* margin: 10rpx auto 15rpx auto; */
 }
 .btn1{
   font-size: 20px;

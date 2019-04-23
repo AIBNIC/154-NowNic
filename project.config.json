@@ -13,7 +13,7 @@
 		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.0",
+	"libVersion": "2.4.4",
 	"appid": "wxb21ff4ccbf760065",
 	"projectname": "%E6%97%A0%E4%B8%8E%E4%BC%A6%E6%AF%94",
 	"isGameTourist": false,
@@ -35,14 +35,70 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 8,
 			"list": [
 				{
 					"id": 0,
-					"name": "s1",
+					"name": "usercenter",
+					"pathName": "pages/usercenter/usercenter",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "dx",
 					"pathName": "pages/searchdx/searchdx",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "login",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "table",
+					"pathName": "pages/worktable/worktable",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "qqmap",
+					"pathName": "pages/qqmap/qqmap",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "applist",
+					"pathName": "pages/applist/applist",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "再见",
+					"pathName": "pages/error/error",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "about",
+					"pathName": "pages/about/about",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "关注模块",
+					"pathName": "pages/fault/fault",
+					"query": "",
+					"scene": 1011
 				}
 			]
 		}
