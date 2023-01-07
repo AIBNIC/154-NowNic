@@ -10,121 +10,29 @@ App({
         image: '../../images/icon-error.png'
       })
     }
-    if (error === ('10003')) {
-      wx.showToast({
-        title: '已经签到了',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10004')) {
-      wx.showToast({
-        title: '签到和签退不是同一天',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10005')) {
-      wx.showToast({
-        title: '帐号不能为空',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10006')) {
-      wx.showToast({
-        title: '已经签退了',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10007')) {
-      wx.showToast({
-        title: '月份不能为空',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10008')) {
-      wx.showToast({
-        title: '帐号不能为空',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10009')) {
-      wx.showToast({
-        title: '月份不能为空',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10010')) {
-      wx.showToast({
-        title: '签到方式不能为空',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10011')) {
-      wx.showToast({
-        title: '签到内容不能为空',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10016')) {
-      wx.showToast({
-        title: '锐捷用户不存在',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10017')) {
-      wx.showToast({
-        title: '锐捷用户不在线',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10018')) {
-      wx.showToast({
-        title: '密码不能为空',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10019')) {
-      wx.showToast({
-        title: '用户名或密码出错',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10020')) {
-      wx.showToast({
-        title: '数据库操作失败',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10021')) {
-      wx.showToast({
-        title: '已有此用户',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10022')) {
-      wx.showToast({
-        title: '帐号不能为空',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10024')) {
-      wx.showToast({
-        title: '栋数不能为空',
-        image: '../../images/icon-error.png'
-      })
-    }
-    if (error === ('10025')) {
-      wx.showToast({
-        title: '该栋数不存在',
-        image: '../../images/icon-error.png'
-      })
-    }
   },
   globalData: {
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
     user:"",
+    notice:"",
   },
 
-  
+  notice(){
+    var that = this;
+    wx.request({
+      url: 'https://nic.fhyiii.cn/wxcx/public/admin/admin/getNotice',
+      method:'GET',
+      data:{},
+      success:function(res){
+        that.globalData.notice = res.data.msg
+      },
+      fail:function(err)
+      {
+        console.log(err)
+      }
+    })
+    
+  },
 
   prompt: function (msg) {
     wx.showModal({
@@ -167,7 +75,13 @@ App({
   //定时任务，每隔二十分钟刷新session 
   refresh:function(){
     var that = this;
-    setInterval(that.login,20* 60 * 1000);
+    var wx_user = wx.getStorageSync('wx_user')
+    if (wx_user){
+      setInterval(function () { that.login(wx_user.user_number, wx_user.user_password) }, 20 * 60 * 1000);
+    }
+ 
+    
+    // 20 * 60 * 1000
   },
   login: function (user_number, user_password){
     console.log('app-login')
@@ -220,6 +134,7 @@ App({
     this.refresh(); //定时任务
     this.update();  //更新软件
 
+    this.notice();  //获取通知
     var wx_user = wx.getStorageSync('wx_user')
     this.login(wx_user.user_number, wx_user.user_password)
 
@@ -285,18 +200,22 @@ App({
     console.log('调用app判断用户是否登录checkLogin')
     var that = this;
     wx.login({
+      
       success: function (res) {
+        console.log(res)
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         wx.setStorageSync('code', res.code)
+        console.log("c"+res)
         if (res.code) {
           wx.request({
-            url: 'https://nic.fhyiii.cn/wxcx/public/index/getOpenid', //改成你服务端的方法
+            url: 'http://127.0.0.1:8080/Wechat/Get_openid', //改成你服务端的方法
             header: { "Content-Type": "application/x-www-form-urlencoded" },
             dataType: "json",
             method: 'POST',
             data: {
               'code': res.code,
             },
+            
             success: function (res) {
               if (res && res.header && res.header['Set-Cookie']) {
                 wx.setStorageSync('SessionId', res.data.SessionId);//保存Cookie到Storage
@@ -315,7 +234,6 @@ App({
                 wx.setStorageSync('wx_img', res.data.msg.wx_img)
                 wx.setStorageSync('level', res.data.msg.level)
                 // console.log(res.data.msg)
-
                 // if (res.data.msg.wx_img == '') {
                 //   console.log('调用app没有授权')
                 //   wx.redirectTo({
@@ -324,6 +242,7 @@ App({
                 // }
                 console.log('调用app判断用户成功');
               }else{
+                
                 wx.clearStorageSync();
                 // wx.redirectTo({
                 //   url: '../login/login',
@@ -333,6 +252,7 @@ App({
             }
           })
         } else {
+          console.log(res)
           console.log('调用app获取用户登录态失败！' + res.errMsg)
         }
       }

@@ -39,6 +39,8 @@ page {
 }
 .head {
   height: 280rpx;
+  margin-bottom: 10px;
+  /* background-image: linear-gradient(180deg, #39b54a, #8dc63f); */
 }
 .head-image{
   display: block;

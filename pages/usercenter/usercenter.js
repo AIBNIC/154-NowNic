@@ -67,7 +67,7 @@ Page({
           title: '稍等',
         })
         wx.request({
-          url: 'https://nic.fhyiii.cn/wxcx/public/index/login',
+          url: 'http://127.0.0.1:8080/Wechat/login',
           method:'POST',
           dataType:'json',
           data:{
@@ -310,7 +310,7 @@ Page({
         var user_number = wx.getStorageSync('user_number')
         if (res.code) {
           wx.request({
-            url: 'https://nic.fhyiii.cn/nic/xiaocx/get_openid.php', //改成你服务端的方法
+            url: 'http://127.0.0.1:8080/Wechat/Get_openid', //改成你服务端的方法
             header: { "Content-Type": "application/x-www-form-urlencoded" },
             dataType: "json",
             method: 'POST',
@@ -423,6 +423,17 @@ Page({
       user: wx.getStorageSync('wx_user')
     })
     // console.log(this.data.user)
+    wx.getWeRunData({
+      success(res) {
+        // 拿 encryptedData 到开发者后台解密开放数据
+        const encryptedData = res.encryptedData
+        // 或拿 cloudID 通过云调用直接获取开放数据
+        const cloudID = res.cloudID
+        console.log(res)
+      }
+    })
+    
+
   },
 
   /**

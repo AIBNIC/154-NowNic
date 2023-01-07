@@ -1,5 +1,31 @@
 // pages/faultInfo/faultInfo.js
 const app = getApp();
+
+//查询ID 获取电信号码 去查询
+function searchId(dx_uid, that) {
+  wx.request({
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/dx/searchID',  //查询设备IP 设备端口 MAC
+    header: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
+    method: 'POST',
+    data: {
+      id: dx_uid,
+      user: that.data.user
+    },
+    success: function (res) {
+      console.log(res)
+      if (res.data.user_number != '') {
+        search8M(res.data.user_number, that)
+      }
+
+    },
+    fail: function (err) {
+      console.log(err)
+    }
+  })
+}
 //查询故障图片
 function searchPic(that,fault_id){
   that.setData({
@@ -156,15 +182,18 @@ function searchIfsuccess(that, fault_id) {
   })
 }
 
-//8M 查名字
+
+//8M 查名字 ID
 function searchName(stu_name, that) {
+  console.log(that.data)
+
   that.setData({
     loading: true
   })
   var dx = that.data.dx
   var username = wx.getStorageSync('user_name')
   wx.request({
-    url: 'https://nic.fhyiii.cn/wxcx/public/index/searchDx',  //
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/searchName',  //
     header: { 
       "Content-Type": "application/x-www-form-urlencoded",
       "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
@@ -174,26 +203,51 @@ function searchName(stu_name, that) {
       info: stu_name,
       user: username
     },
-    //20175533426
+    //20175533426 冯锶琪
     success: function (res) {
-      // console.log(res)
-
-      if (res.data != null){
-        if (res.data.success) { // 判断是否查询到
-          that.setData({
-            dx: res.data.msg
-          })
-
-          that.setData({
-            loading: false
-          })
-        }
+      if (res.data.uid != null){
+        searchId(res.data.uid,that)
       }
       
     },
     // fail:function(){
     //   that.handleError()
     // }
+  })
+}
+
+//学号 电信8M
+function search8M(user_number, that) {
+  console.log(that.data)
+  that.setData({
+    loading: true
+  })
+  var dx1 = that.data.dx1
+  var username = wx.getStorageSync('user_name')
+  wx.request({
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/searchDx',  //查询设备IP 设备端口 MAC
+    header: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
+    method: 'POST',
+    data: {
+      info: user_number,
+      user: username
+    },
+    //20175533426
+    success: function (res) {
+      console.log(res)
+      if (res.data.userid != "查询结果为空") { // 判断是否查询到
+        that.setData({
+          dx: res.data
+        })
+      }
+      that.setData({
+        loading: false
+      })
+      // console.log(dx1)
+    }
   })
 }
 //学号 电信2M
@@ -216,9 +270,9 @@ function searchNumber(user_number, that) {
     },
     //20175533426
     success: function (res) {
-      if (res.data.success) { // 判断是否查询到
+      if (res.data.userid != "查询结果为空") { // 判断是否查询到
         that.setData({
-          dx1: res.data.msg
+          dx1: res.data
         })
       }
       that.setData({
@@ -247,6 +301,7 @@ function searchInfo(user_number, that){
     },
     //20175533426
     success: function (res) {
+      // console.log(res)
       if (res.data == false) {
         that.setData({
           loading: false
@@ -265,7 +320,7 @@ function searchInfo(user_number, that){
         })
 
         // wx.hideLoading()
-        searchName(res.data.stu_idcard, that)
+        searchName(res.data.stu_name, that)
         searchNumber(res.data.stu_number, that)
         // searchAbms(res.data.stu_number, that)
         // searchRoom(res.data.stu_number, that)

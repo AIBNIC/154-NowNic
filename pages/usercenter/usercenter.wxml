@@ -3,9 +3,9 @@
 </view> -->
 <view class="content web-font">
   <view class="head clearfix"  style="padding-top:{{statusBarHeight+40}}px">
+  
   <view class='my' style='top:{{statusBarHeight+8}}px'>我的</view>
     <!-- <view class='info_head'>
-      
     </view> -->
     <view class="head-logo" wx:if="{{user.wx_img}}">
         <image class="head-img" src="{{user.wx_img}}"></image>
@@ -26,120 +26,56 @@
       </view>
     <image src='https://image.weilanwl.com/gif/wave.gif' mode='scaleToFill' class='gif-black response' style='height:64rpx;mix-blend-mode:screen'></image>
       <image src='../../images/999.png' class='head-image'></image>
-    <!-- <view class="head-right">
-      <view>
-        <text class="text-title">学号：</text><text class="text-c">{{user.student}}</text>
-      </view>
-      <view>
-        <text class="text-title">姓名：</text><text class="text-c">{{user.name}}</text>
-      </view>
-      <view>
-        <text class="text-title">栋数：</text><text class="text-c">{{user.floor}}</text>
-      </view>
-    </view> -->
+   
   </view>
-  <view class="option" wx:if="{{user.level>0}}">
-    <!-- <view class="btns">
-      <button class="btn" bindtap="amendDs">修改栋数</button>
-    </view> -->
-    <!-- <view class="btns">
-      <view wx:if="{{user.name == '吴佩婷'}}">
-      <i-swipeout  i-class="i-swipeout-demo-item" actions="{{actions}}" class='swipeout'>
-        <view slot="content">
-          <button class="btn1" bindtap=""><image src='../../images/dogd.png' class='btns-img'></image>
-            Ｉ Lᵒᵛᵉᵧₒᵤ❤  
-          </button>
-        </view>
-      </i-swipeout>
+  <view class="" wx:if="{{user.level>0}}">
+    
+    <view class='cu-list grid col-4 no-border sm-border card-menu'>
+     
+      <view class="cu-item" wx:if="{{user.level>2}}">
+        <button class="btn" bindtap="searchStu" >
+          <image src='../../images/search.png' class='btns-img'></image>
+          <text>用户查询</text>
+        </button>
       </view>
-    </view> -->
-    <!-- <view class="cu-list grid col-4 no-border">
-      <view class="cu-item" >
-        <view class='icon-cardboardfill text-red text-{{item.color}}'>
-          <view class="cu-tag badge" >
-            <block >99</block>
-          </view>
-        </view>
-        <text>VR</text>
+      <view class="cu-item" wx:if="{{user.level>2}}">
+        <button class="btn" bindtap="searchdx" >
+          <image src='../../images/chahf.png' class='btns-img'></image>
+          <text>电信查询</text>
+        </button>
       </view>
-    </view> -->
-    <view class="btns" wx:if="{{user.level>3}}">
-      <button class="btn" bindtap="worktable" >
-      <image src='../../images/txl.png' class='btns-img'></image>
-       <view class='btns_text'>值班表</view>
-      </button>
-    </view>
-    <view class="btns" wx:if="{{user.level>2}}">
-      <button class="btn" bindtap="searchStu"><image src='../../images/search.png' class='btns-img'></image>
-      <view class='btns_text'>用户查询</view>
-      </button>
-    </view>
-    <view class="btns" wx:if="{{user.level>2}}">
-      <button class="btn" bindtap="searchdx"><image src='../../images/chahf.png' class='btns-img'></image>
-      <view class='btns_text'>电信查询</view>
-       
-      </button>
-    </view>
-     <view class="btns" wx:if="{{user.level>0}}">
-      <button class="btn" bindtap="goLoggingData"><image src='../../images/ludan.png' class='btns-img'></image>
-      <view class='btns_text'>开网录单</view>
-       
-      </button>
-    </view>
-     <view class="btns" wx:if="{{user.level>0}}">
-      <button class="btn" bindtap="updx"><image src='../../images/searching.png' class='btns-img'></image>
-      <view class='btns_text'>上报电信</view>
-       
-      </button>
-    </view>
-    <view class="btns" wx:if="{{user.level>0}}">
-    <button class="btn" bindtap="amendPassword"><image src='../../images/set.png' class='btns-img'></image>
-     <view class='btns_text'>修改密码</view>
-      </button>
-    </view>
-    <view class="btns" wx:if="{{user.level>0}}">
-    <button class="btn" bindtap="FingerPrint"><image src='../../images/hand.png' class='btns-img'></image>
-    <view class='btns_text'>录入指纹</view>
-      </button>
-    </view>
-    <view class="btns" wx:if="{{user.level>0}}">
-      <button class="btn" bindtap="clearLocaStroage"><image src='../../images/exit.png' class='btns-img'></image>
-      <view class='btns_text'>退出登录</view>
+      <view class="cu-item" wx:if="{{user.level>0}}">
+        <button class="btn" bindtap="updx" >
+          <image src='../../images/searching.png' class='btns-img'></image>
+          <text>上报电信</text>
         </button>
+      </view>
+      <view class="cu-item" wx:if="{{user.level>0}}">
+        <button class="btn" bindtap="amendPassword" >
+          <image src='../../images/set.png' class='btns-img'></image>
+          <text>修改密码</text>
+        </button>
+      </view>
+      <view class="cu-item" wx:if="{{user.level>0}}">
+        <button class="btn" bindtap="FingerPrint" >
+          <image src='../../images/hand.png' class='btns-img'></image>
+          <text>录入指纹</text>
+        </button>
+      </view>
+      <view class="cu-item" wx:if="{{user.level>0}}">
+        <button class="btn" bindtap="clearLocaStroage" >
+          <image src='../../images/exit.png' class='btns-img'></image>
+          <text>退出登录</text>
+        </button>
+      </view>
+
     </view>
-    <!-- <view class="btns" wx:if="{{user.level>0}}">
-      <button class="btn" bindtap="about"><image src='../../images/about.png' class='' style='width:60rpx;height:60rpx;'></image>
-      <view class='btns_text'>关于</view> 
-        </button>
-    </view> -->
-    <!-- <view class="btns" wx:if="{{user.level>0}}">
-      <button class="btn" bindtap="qqmap"><image src='../../images/exit.png' class='btns-img'></image>
-      <view class='btns_text'>地图</view>
-        </button>
-    </view> -->
-    <!-- <view class="btns">
-      <button class="btn" bindtap="goLoggingData">开网录入</button>
-    </view> -->
-    <!-- <view class="btns">
-      <button class="btn" bindtap="updateNic"><image src='../../images/update.png' class='btns-img'></image>更新版本</button>
-    </view> -->
-    <!-- <view class="btns">
-      <button class="btn" bindtap="clearLocaStroage" style='text-align:center;text-indent:0;'>退出登录</button>
-    </view> -->
+    
   </view>
   <i-load-more tip="© 2018-2019 Designed by FHYI " loading="{{ false }}" style="color:#ddd;" bindtap="about"/>
-  <view style="width:100%;height:160rpx;background:rgba(150, 150, 150, 0.089);z-index:100;margin-top:-36rpx;">
-    <official-account style="rgba(150, 150, 150, 0.089);"></official-account>
-  </view>
+  
   <modal hidden="{{hiddenmodalput}}" title="修改密码" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="checkPass">
     <input type='text' placeholder="请输入密码" bindinput="setNewPass" bindblur="setNewPass"></input>
   </modal>
-  <!-- <modal hidden="{{hiddenmodalDs}}" title="修改栋数" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="checkDs">
-    <picker bindchange="bindPickerChange" value="{{dsIndex}}" range="{{dsArray}}">
-      <view class="picker">
-        当前选择：{{dsArray[dsIndex]}}
-      </view>
-    </picker>
-  </modal> -->
 </view>
 

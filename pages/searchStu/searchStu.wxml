@@ -34,7 +34,7 @@
   <view><text class='left left2'>身份后八</text><text class='right'>{{stu_idcard1}}</text></view>
   <view><text class='left left2'>宿舍</text><text class='right'>{{stu_room}}</text></view>
   <view><text class='left left2'>{{stu_state}}到期</text><text class='right'>{{stu_end_time}}</text></view>
-  <view wx:if="{{userlevel >3}}"><text class='left left2'>安朗在线</text><text class='right'>{{stu_ip}}</text></view>
+  <view wx:if="{{userlevel >3}}"><text class='left left2'>安朗在线</text><text class='right'>{{stu_ip}}</text><view bindtap='offLine' style='align-items:center;' wx:if="{{stu_ip != '' && userlevel >3}}">下线</view></view>
   <view><text class='left left2'>修改宿舍</text><text class='right'>{{stu_rooms}}（2 为次数已满）</text><view bindtap='resetRoom' style='align-items:center;' wx:if="{{stu_rooms != '' && userlevel >3}}">重置</view></view>
 </scroll-view>
 <!-- <view class='btn_fault' bindtap='upfault'>
@@ -46,12 +46,13 @@
         <i-collapse-item title="电信8M" name="name1">
         <view slot="content" i-class-content="green-text">
           <view class="item" wx:for="{{dx}}" wx:key="index">
-            <block wx:if="{{item.user_name}}">
+            <block wx:if="{{item.user_number}}">
               <scroll-view class='info' scroll-y scroll-with-animation>
-                <view><text class='left left2'>用户</text><text class='right'>{{item.user_name}}</text></view>
+                <!-- <view><text class='left left2'>用户</text><text class='right'>{{item.user_name}}</text></view> -->
                 <view><text class='left left2'>电信账号</text><text class='right'>{{item.user_number}}</text></view>
-                <view><text class='left left2'>电信速率</text><text class='right'>{{item.user_speed}}</text></view>
-                <view><text class='left left2'>状态</text><text class='right'>{{item.user_state}}</text><view class='time_btn' hover-class='time_btn_hover' bindtap='changemima'>修改密码</view></view>
+                <view><text class='left left2'>电信速率</text><text class='right'>{{item.speed}}</text></view>
+                <view><text class='left left2'>状态</text><text class='right'>{{item.state}}</text>
+                <view class='time_btn' hover-class='time_btn_hover' bindtap='changemima' wx:if="{{userlevel >3}}">修改密码</view></view>
                 
               </scroll-view>
             </block>
@@ -66,12 +67,12 @@
       <i-collapse-item title="电信2M" name="name1" >
         <view slot="content" i-class-content="green-text">
           <view class="item" wx:for="{{dx1}}" wx:key="index">
-            <block wx:if="{{item.user_name}}">
+            <block wx:if="{{item.user_number}}">
               <scroll-view class='info' scroll-y scroll-with-animation>
-                <view><text class='left left2' style='width: 48px;'>用户</text><text class='right'>{{item.user_name}}</text></view>
+                <!-- <view><text class='left left2' style='width: 48px;'>用户</text><text class='right'>{{item.user_name}}</text></view> -->
                 <view><text class='left left2'>电信账号</text><text class='right'>{{item.user_number}}</text></view>
-                <view><text class='left left2'>电信速率</text><text class='right'>{{item.user_speed}}</text></view>
-                <view><text class='left left2' >状态</text><text class='right'>{{item.user_state}}</text><view class='time_btn' hover-class='time_btn_hover' bindtap='changemima_2m'>修改密码</view></view>
+                <view><text class='left left2'>电信速率</text><text class='right'>{{item.speed}}</text></view>
+                <view><text class='left left2' >状态</text><text class='right'>{{item.state}}</text><view class='time_btn' hover-class='time_btn_hover' bindtap='changemima_2m' wx:if="{{userlevel >3}}">修改密码</view></view>
               </scroll-view>
             </block>
             <block wx:else>

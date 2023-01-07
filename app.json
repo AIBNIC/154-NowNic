@@ -1,39 +1,35 @@
 {
-  "pages":[
+  "pages": [
     "pages/fault/fault",
+    "pages/applist/applist",
     "pages/usercenter/usercenter",
     "pages/login/login",
     "pages/searchdx/searchdx",
-    "pages/ruijie/ruijie",
     "pages/searchStu/searchStu",
-    "pages/ludan/ludan",
     "pages/updx/updx",
-    "pages/qqmap/qqmap",
-    "pages/upfault/upfault",
-    "pages/applist/applist",
-    "pages/worktable/worktable",
     "pages/faultInfo/faultInfo",
     "pages/about/about",
     "pages/error/error",
     "pages/logs/logs"
   ],
-  "window":{
-    "backgroundTextStyle":"dark",
+  
+  "window": {
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "NIC网络中心",
-    "navigationBarTextStyle":"black",
+    "navigationBarTextStyle": "black",
     "navigationStyle": "default"
   },
-  "networkTimeout":{
-    "request": 20000, 
+  "networkTimeout": {
+    "request": 20000,
     "connectSocket": 20000,
     "downloadFile": 20000
   },
   "tabBar": {
-    "color": "#8a8a8a", 
-    "borderStyle": "white", 
+    "color": "#8a8a8a",
+    "borderStyle": "white",
     "selectedColor": "black",
-    "backgroundColor": "#ffffff", 
+    "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "pages/fault/fault",
@@ -59,6 +55,6 @@
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
-

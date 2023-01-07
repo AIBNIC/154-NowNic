@@ -1,26 +1,18 @@
 <view class="container web-font">
   <!-- 滑动选择框 -->
-  <!-- <view wx:for="{{10}}" wx:key wx:if="{{index==TabCur}}" class='bg-grey padding margin text-center'>
-    Tab{{index}}
-  </view> -->
-<!-- <view style='z-index:99;'> -->
+
   <scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
-    <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{room}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+    <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{room}}" wx:key="title" bindtap='tabSelect' data-id="{{index}}">
       {{item.title}}
     </view>
   </scroll-view>
-<!-- </view> -->
-    <!-- <view class='text-bold text-xxl margin-xl'>{{item.title}} 栋故障</view> -->
-    <!-- <view class='text-xl margin-xl'>点击头像打开抽屉</view>
-    <navigator class='cu-btn bg-green lg block shadow radius margin-xl' open-type="navigateBack" delta="1" hover-class="none">
-      <text class='icon-back'> </text> 返回上一页
-    </navigator> -->
-   
- 
 
   <!-- 用户信息 -->
   <view class="user-fault" style='margin-top:95rpx;'>
-    <view wx:if="{{user_num}}" class='user_num'>{{user_num}} 个故障 , 加油鸭！</view>
+    <i-notice-bar  closable wx:if="{{notice}}"  icon="emoji" color="{{noticecolor}}" loop background-color="#ffffff" >
+      {{notice}}
+    </i-notice-bar>
+    <view wx:if="{{user_num}}" class='user_num' style="margin-top:10px;">{{user_num}} 个故障 , 加油鸭！</view>
     <!-- 用户信息模版 -->
     <view wx:if="{{faultStatus == 2}}">
       <block wx:for="{{faultData}}" wx:for-item="item" wx:key="key" wx:for-index="index">
@@ -61,7 +53,7 @@
     <view class="info-item" wx:if="{{userLevel>0 }}">
     
       <button class="cu-btn bg-blue shadow button-hover" data-user="{{student_number}}" data-userName="{{student_name}}" data-faultId="{{fault_id}}" data-faultTime="{{reporting_time}}" bindtap="getUserFault" style='margin: 10rpx 0;'>查看详情</button>
-      <!-- <button wx:if="{{activeFloor == userFloor || userName == '方宏毅'}}" class="btn-fault-del" data-faultId="{{fault_id}}" data-userName="{{student_name}}" bindtap="checkDelFault">删除故障</button> -->
+      
       <button wx:if="{{activeFloor == userFloor && userLevel > 1 || userLevel == 4}}" class="btn-fault-del cu-btn bg-red shadow button-hover" data-faultId="{{fault_id}}" data-userName="{{student_name}}" bindtap="checkDelFault">删除故障</button>
     </view>
   </view>

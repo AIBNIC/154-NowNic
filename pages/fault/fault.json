@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "wux-floating-button": "../../dist1/floating-button/index",
-    "wux-refresher": "../../dist1/refresher/index"
+    "wux-refresher": "../../dist1/refresher/index",
+    "i-notice-bar": "../../dist/notice-bar/index"
   }
 }

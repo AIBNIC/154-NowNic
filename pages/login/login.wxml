@@ -10,11 +10,7 @@
       <view class='login-title'>AIB网络中心</view>
       <image src='https://image.weilanwl.com/gif/wave.gif' mode='scaleToFill' class='gif-black response' style='height:64rpx;mix-blend-mode:screen;position: absolute;bottom:0px;'></image>
     </view>
-    <!-- <swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
-    <swiper-item wx:for="{{4}}" wx:key class="{{cardCur==index?'cur':''}}">
-      <view class='bg-img shadow-blur' style="background-image:url(https://image.weilanwl.com/img/4x3-{{index+1}}.jpg);boder:1px solid red;"></view>
-    </swiper-item>
-  </swiper> -->
+   
   </view>
   
   <!-- 输入框 -->
@@ -23,12 +19,10 @@
       <input class="input" type="number" maxlength="11" bindblur="userID" bindconfirm="userID" bindinput="userID" placeholder="帐号" ></input>
       <input class="input" type="text" password="true" placeholder="密码" bindblur="userPass" bindconfirm="userPass" bindinput="userPass" ></input>
     </view>
-    <!-- <input class="input" type="number" maxlength="11" bindblur="userID" bindconfirm="userID" bindinput="userID" placeholder="帐号" ></input>
-    <input class="input" type="text" password="true" placeholder="密码" bindblur="userPass" bindconfirm="userPass" bindinput="userPass" ></input> -->
+   
   </view>
   <!-- 登录 -->
   <view class="btns">
     <button class="btn-login cu-btn lg button-hover bg-gradual-blue shadow " bindtap="checkUser" >登录</button>
   </view>
 </view>
-<!-- <view style='margin-top:20px;'> 测试账号：12345678910 密码：123456</view> -->

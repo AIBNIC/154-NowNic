@@ -13,6 +13,7 @@ Page({
     faultStatus: 0,
     user_num: '', 
     TabCur: 1,
+    notice: "", //通知
 
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
@@ -29,10 +30,16 @@ Page({
         title: 14
       },
       {
-        title: 18 + ',' + 19
+        title: 18
       },
       {
-        title: 20 + ',' + 21
+        title: 19
+      },
+      {
+        title: 20
+      },
+      {
+        title: 21
       },
       {
         title: 22
@@ -44,12 +51,14 @@ Page({
         title: 24
       },
       {
-        title: 25 + ',' + 26
+        title: 25
+      },
+      {
+        title: 26
       },
       {
         title: 27
       },
-      
 
     ],
   },
@@ -172,8 +181,10 @@ Page({
       var ds2 = '北区' + ds[1] + '栋'
       var errorcount = 0;
       // 第一次查询
+     
       wx.request({
-        url: 'https://nic.fhyiii.cn/wxcx/public/index/showFault?floorId=' + ds1,
+        url: "http://127.0.0.1:8080/Wechat/SearchGuZhang?"+ds1,
+        
         success: function (res) {
           // console.log(res)
           if (res.data.error) {
@@ -188,7 +199,7 @@ Page({
 
           //  第二次查询
           wx.request({
-            url: 'https://nic.fhyiii.cn/wxcx/public/index/showFault?floorId=' + ds2,
+            url: 'http://127.0.0.1:8080/Wechat/SearchGuZhang?' + ds2,
             success: function (res) {
               console.log(res)
               if (res.data.error) {
@@ -240,7 +251,7 @@ Page({
       }
 
       wx.request({
-        url: 'https://nic.fhyiii.cn/wxcx/public/index/showFault?floorId=' + ds,
+        url: 'http://127.0.0.1:8080/Wechat/SearchGuZhang?' + ds,
         success: function (res) {
 
           if (res.data.error) {
@@ -265,16 +276,17 @@ Page({
   },
   // 判断用户是否登录
   checkLogin: function () {
-    console.log('app开始自动登录')
+    console.log('fault页面判断用户是否登录')
     var that = this;
     wx.login({
       success: function (res) {
+        console.log(res)
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         wx.setStorageSync('code', res.code)
         var user_number = wx.getStorageSync('user_number')
         if (res.code) {
           wx.request({
-            url: 'https://nic.fhyiii.cn/nic/xiaocx/get_openid.php', //改成你服务端的方法
+            url: 'http://127.0.0.1:8080/Wechat/Get_openid', //改成你服务端的方法
             header: { "Content-Type": "application/x-www-form-urlencoded" },
             dataType: "json",
             method: 'POST',
@@ -287,7 +299,7 @@ Page({
               //如果是首次登录，会跳到授权页面
               if (res.data == 'error' || res.data == 'false') {
                 wx.setStorageSync('user_state', 'false')
-                console.log('app登录失败');
+                console.log('fault页面判断登录失败');
               } else {//o1RnE5H7yD9xqp-dKtj9R1M20GYg
                 that.setData({
                   user: res.data
@@ -305,12 +317,12 @@ Page({
                 wx.setStorageSync('wx_img', res.data.wx_img)
                 wx.setStorageSync('level', res.data.level)
 
-                console.log('app登录成功');
+                console.log('fault页面判断用户登录成功');
               }
             }
           })
         } else {
-          console.log('获取用户登录态失败！' + res.errMsg)
+          console.log('fault页面获取用户登录态失败！' + res.errMsg)
         }
       }
     })
@@ -373,7 +385,8 @@ Page({
       // console.log(that.data.user)
       if (that.data.user.level == 0) {
         wx.redirectTo({
-          url: '../error/error',
+          // url: '../error/error',
+          
         })
       }
       if (that.data.user.level != 0){
@@ -399,6 +412,22 @@ Page({
       
       // 向服务器发起查询故障请求
       // this.judgeSearchFault(that.data.user.floor)
+      //公告
+      wx.request({
+        url: 'http://127.0.0.1:8080/Wechat/SearchGuZhang?',
+        method: 'GET',
+        data: {},
+        success: function (res) {
+          that.setData({
+            notice: res.data.msg,
+            noticecolor: res.data.color
+          })
+        },
+        fail: function (err) {
+          console.log(err)
+        }
+      })
+      
     } else {
       console.log('用户不存在')
       wx.reLaunch({

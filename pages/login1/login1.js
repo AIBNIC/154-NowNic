@@ -57,7 +57,8 @@ Page({
   login: function() {
     var that = this;
     wx.request({
-      url: 'https://nic.fhyiii.cn/nic/app_api/net_test/restful/login',
+      // url: 'https://nic.fhyiii.cn/nic/app_api/net_test/restful/login'
+      url: 'http://localhost:8080/Nic-wx/LoginServlet',
       method: 'POST',
       data: this.data.user,
       success: function(res) {

@@ -124,7 +124,8 @@ Page({
 
     // console.log(wx.getStorageSync('userInfo_nickName'))
     wx.request({
-      url: 'https://nic.fhyiii.cn/wxcx/public/index/login',
+      // url: 'https://nic.fhyiii.cn/wxcx/public/index/login',
+      url: 'http://127.0.0.1:8080/Wechat/login',
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -133,15 +134,17 @@ Page({
         code: this.data.code,
         xuehao: this.data.user.username,
         password: this.data.user.password,
-        // userInfo_nickName: wx.getStorageSync('userInfo_nickName'),
+        // userInfo_nickName: wx.getStorageSync('userInfo_nickName'),1
         // userInfo_wx_img: wx.getStorageSync('userInfo_wx_img')
       },
+      
       success: function(res) {
         isOutTime = false;
         wx.hideLoading();
-        console.log(res)
+        console.log("data"+res.data);
         // 判断返回的数据是否登录成功
         if (res.data.errcode){
+          // console.log("cuochu"+res.data.errcode);
           wx.showModal({
             title: '错误',
             content: '重启小程序',
@@ -156,27 +159,37 @@ Page({
           })
         }
         if(res.data.success) {
+          
+          // if(res.data.user_name) {
           if (res && res.header && res.header['Set-Cookie']) {
             wx.setStorageSync('SessionId', res.data.SessionId);//保存Cookie到Storage
-          }
+          } 
           wx.showToast({
             title: '登陆成功',
             icon: 'success',
             success: function () {
-              // console.log(res.data.data)
+              // console.log(res.data)
               wx.setStorageSync('user_state', 1)
-              that.mylocalStorage(res.data.data);
+              that.mylocalStorage(res.data);
               console.log(wx.getStorageSync('user_floor'))
+              console.log(res.data.success);
               wx.switchTab({
+
                 url: '../fault/fault'
               });
-            }
+            }  
           })
         } else {
-          wx.showToast({
-            title: res.data.msg,
-            image: '../../images/icon-error.png'
+          wx.vibrateLong();
+          wx.showModal({
+            title: '错误提示',
+            content: res.data.msg+"",
+            showCancel:false
           })
+          // wx.showToast({
+          //   title: res.data.msg,
+          //   image: '../../images/icon-error.png'
+          // })
         }
       },
       complete: () => {
@@ -194,6 +207,7 @@ Page({
     //获取code
     var that = this;
     wx.login({
+      
       success: function (res) {
         that.setData({
           code: res.code
@@ -202,8 +216,9 @@ Page({
     })
   },
   // 缓存用户信息
+ 
   mylocalStorage: function(data) {
-    wx.setStorageSync('wx_user', data)
+    wx.setStorageSync('wx_user', data.success)
     wx.setStorageSync('user_floor', data.user_floor)
     wx.setStorageSync('user_name', data.user_name)
     wx.setStorageSync('user_number', data.user_number)
@@ -235,7 +250,6 @@ Page({
     // var user = {data};
     // return user;
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -252,10 +266,11 @@ Page({
     this.getCode();
     wx.getUserInfo({
       success(res) {
-        console.log(res)
+        console.log("UserInfo->"+res)
         wx.setStorageSync('userInfo_nickName', res.userInfo.nickName)
         wx.setStorageSync('userInfo_wx_img', res.userInfo.avatarUrl)
-        console.log('获取用户信息成功')
+        
+        console.log('获取用户信息成功'+userInfo_nickName)
       },
       fail(error) {
         console.log('获取用户信息失败')

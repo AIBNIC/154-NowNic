@@ -18,14 +18,7 @@
   <view class="margin radius bg-gradual-green shadow-blur" wx:if="{{loading}}">
     <image src='https://image.weilanwl.com/gif/wave.gif' mode='scaleToFill' class='gif-black response' style='height:100rpx;mix-blend-mode:screen'></image>
   </view>
-  <view class='main'>
-    <!-- <view class='main_a'>
-      <text class='line'>在线人数：{{onLine}}人</text>
-      <text class='line'>请输入电信账号 </text>
-      <input class='dxnumber' placeholder='电信号码' auto-focus placeholder-class='placeholder' bindinput="cxnumber" maxlength='11'/>
-      <button class='btn' loading='{{loading}}' hover-class="btn_hover" bindtap='searchTap'>查询</button>
-    </view> -->
-  </view>
+ 
   <!-- 20185532116 -->
   <view class='cu-list menu' style='margin:30rpx;'>
     <!-- <view class='padding-sm radius margin-top-sm text-m' wx:if="{{dx_state}}">
@@ -40,16 +33,9 @@
               <view class='content'>姓名:  {{stuName}}</view>
               <view class='content'>{{stuSpeed}}:  {{stuState}}</view>
               <view class='content' wx:if="{{dx_state!=''}} ">用户状态: {{dx_state}}</view>
+              <view class='content' wx:if="{{dx_createtime!=''}} ">注册时间:  {{dx_createtime}}</view>
               <view class='content' wx:if="{{dx_time!=''}} ">上网时间:  {{dx_time}}</view>
               <view class='content' wx:if="{{dx_id!=''}} ">电信账号: {{dx_id}}</view>
-              <view class='content' wx:if="{{rechargeNbr}} ">电话号:  {{rechargeNbr}}</view>
-              <view class='content' wx:if="{{totalBalance}} ">可用余额: {{totalBalance}}</view>
-              <view class='content' wx:if="{{reason}}">提示信息:  {{reason}}</view>
-              <!-- <p>姓名：{{stuName}}</p>
-              <p>电话号:  {{rechargeNbr}}</p>
-               <p>{{stuSpeed}}:  {{stuState}}</p>
-              <p>可用余额：{{totalBalance}}</p>
-              <p>提示信息:  {{reason}}</p> -->
           </view>
           <button class="cu-btn bg-green shadow-blur" style="margin-bottom:10px;width:100%;" wx:if="{{dx_state=='在线'}}" id='' hover-class="" bindtap='outUser' data-dx_id="{{dx_id}}">下线</button>
     </scroll-view>

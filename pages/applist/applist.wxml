@@ -3,14 +3,9 @@
     <view style='color:#fff;font-size:40rpx;margin-left:40rpx;'>故障列表</view>
   </view>
 </view>
-<!-- //轮播 -->
-<!-- <swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
-  <swiper-item wx:for="{{4}}" wx:key>
-    <image src="https://image.weilanwl.com/img/4x3-{{index+1}}.jpg" mode='aspectFill'></image>
-  </swiper-item>
-</swiper> -->
+
 <view class="VerticalBox" style='padding-top:{{CustomBar}}px'>
-  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 190rpx)">
+  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 150rpx)">
     <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{room}}" wx:key bindtap='tabSelect' data-id="{{index}}">
       {{item.title}}栋
     </view>
@@ -18,8 +13,11 @@
   <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 148rpx)" scroll-into-view="main-id-{{TabCur}}" bindscroll="VerticalMain" >
    
   <view class='cu-list menu menu-avatar' style='margin-left:5px;' wx:if="{{faultStatus == 2}}">
+      <i-notice-bar  closable wx:if="{{notice}}"  icon="emoji" color="{{noticecolor}}" loop>
+          {{notice}}
+      </i-notice-bar>
     <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}"  wx:for="{{faultData}}" wx:key id="main-id-{{index}}"bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}" style='padding:10px;animation:show 1.4s 1;-webkit-animation:show 1.4s 1;'>
-
+      
       <view class='content'>
         <view class='text-grey text-l'>{{item.floor}}{{item.room}} | {{item.student_name}}</view>
         <view class='text-gray text-m'>
@@ -34,10 +32,12 @@
       </view>
       
     </view>
+    
   </view>
   </scroll-view>
   
 </view>
+
 <view class="cu-modal {{modalName=='delModal'?'show':''}}">
   <view class="cu-dialog">
     <view class="bg-img" style="background-image: url('https://nic.fhyiii.cn/images/one.jpg');height:200px;">

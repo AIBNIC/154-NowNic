@@ -3,11 +3,38 @@ const { $Toast } = require('../../dist/base/index');
 const { $Message } = require('../../dist/base/index');
 
 const app = getApp()
+
+
+//查询ID 获取电信号码 去查询
+function searchId(dx_uid,that){
+  wx.request({
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/dx/searchID',  //查询设备IP 设备端口 MAC
+    header: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
+    method: 'POST',
+    data: {
+      id: dx_uid,
+      user: that.data.user
+    },
+    success: function (res) {
+      // console.log(res)
+      if(res.data.user_number != ''){
+        search8M(res.data.user_number,that)
+      }
+      
+    },
+    fail:function(err){
+      console.log(err)
+    }
+  })
+}
 //8M 查名字
 function searchName(stu_name,that){
   var dx = that.data.dx
   wx.request({
-    url: 'https://nic.fhyiii.cn/wxcx/public/index/searchDx',  //查询设备IP 设备端口 MAC
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/searchName',  //查询设备IP 设备端口 MAC
     header: {          
       "Content-Type": "application/x-www-form-urlencoded",         
       "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")       
@@ -19,41 +46,77 @@ function searchName(stu_name,that){
     },
     //20175533426
     success: function (res) {
-      if (res.data.success) { // 判断是否查询到
-        if (res.data.msg.length){
-          for (var i = 0; i < res.data.msg.length; i++) {
-            if (res.data.msg[i].user_cid === '') {  // 无此用户时
-              that.setData({
-                ['dx[' + i + ']']: '无此用户'
-              })
-            } else {  // 搜索到用户信息
-              that.handleSuccess()
-              that.setData({
-                ['dx[' + i + ']']: res.data.msg[i]
-              })
-
-              // 处理身份证后八位
-              that.setData({
-                ['dx[' + i + '].user_cid2']: that.data.dx[i].user_cid.slice(11, 19)
-              })
-            }
-          }
-        }else{
-          that.handleSuccess()
-          that.setData({
-            'dx[0]': res.data.msg
-          })
-          // 处理身份证后八位
-          that.setData({
-            ['dx[0].user_cid2']: that.data.dx[0].user_cid.slice(11, 19)
-          })
-        }
-       
+      // console.log(res)
+      if (res.data.uid != '') { // 判断是否查询到
+        searchId(res.data.uid, that)
+        
       }
     },
-    // fail:function(){
-    //   that.handleError()
-    // }
+    fail:function(){
+      that.handleError()
+    }
+  })
+}
+//8M 
+function search8M(user_number, that) {
+  var dx = that.data.dx
+  wx.request({
+    url: 'https://nic.fhyiii.cn/wxcx/public/index/searchDx',  //查询设备IP 设备端口 MAC
+    header: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Cookie": "PHPSESSID=" + wx.getStorageSync("SessionId")
+    },
+    method: 'POST',
+    data: {
+      info: user_number,
+      user: that.data.user
+    },
+    success: function (res) {
+      if (res.data.userid != '查询结果为空') { // 判断是否查询到
+        // if (res.data.length){
+        //   for (var i = 0; i < res.data.length; i++) {
+        //     if (res.data[i].user_cid === '') {  // 无此用户时
+        //       that.setData({
+        //         ['dx[' + i + ']']: '无此用户'
+        //       })
+        //     } else {  // 搜索到用户信息
+        //       wx.vibrateShort();
+        //       that.handleSuccess()
+        //       that.setData({
+        //         ['dx[' + i + ']']: res.data[i]
+        //       })
+
+        //       // 处理身份证后八位
+        //       that.setData({
+        //         ['dx[' + i + '].user_cid2']: that.data.dx[i].user_cid.slice(11, 19)
+        //       })
+        //     }
+        //   }
+        // }else{
+          that.handleSuccess()
+          wx.vibrateShort();
+
+          that.setData({
+            'dx[0]': res.data
+          })
+          // console.log(that.data)
+
+          // 处理身份证后八位
+          that.setData({
+            ['dx[0].user_cid2']: that.data.stu_idcard.slice(10, 19)
+          })
+        // }
+        console.log(that.data)
+      }else{
+        // that.handleError8M()
+        that.setData({
+          'dx': ''
+        })
+      }
+    },
+    fail:function(){
+      that.handleError()
+    }
   })
 }
 //学号 电信2M
@@ -70,40 +133,29 @@ function searchNumber(user_number, that) {
       info: user_number,
       user: that.data.user
     },
-    //20175533426
+    //201755334
     success: function (res) {
-      if (res.data.success) { // 判断是否查询到
-        if(res.data.msg.length){
-          for (var i = 0; i < res.data.msg.length; i++) {
-            if (res.data.msg[i].user_cid === '') {  // 无此用户时
-              that.handleSuccess()
-              that.setData({
-                ['dx1[' + i + ']']: '无此用户'
-              })
-            } else {  // 搜索到用户信息
-              that.handleSuccess()
-              that.setData({
-                ['dx1[' + i + ']']: res.data.msg[i]
-              })
-
-              // 处理身份证后八位
-              that.setData({
-                ['dx1[' + i + '].user_cid2']: that.data.dx1[i].user_cid.slice(11, 19)
-              })
-            }
-          }
-        }else{
+      if (res.data.userid != '查询结果为空'){
           that.handleSuccess()
+          wx.vibrateShort();
+
           that.setData({
-            'dx1[0]': res.data.msg
+            'dx1[0]': res.data
           })
           // 处理身份证后八位
           that.setData({
-            ['dx1[0].user_cid2']: that.data.dx1[0].user_cid.slice(11, 19)
+            ['dx1[0].user_cid2']: that.data.stu_idcard.slice(10, 19)
           })
-        }
-       
+      }else{
+        that.handleError2M()
+        that.setData({
+          'dx1': ''
+        })
       }
+      console.log(that.data)
+    },
+    fail:function(err){
+      console.log(err)
     }
   })
 }
@@ -123,7 +175,7 @@ function searchRoom(user_number, that) {
     success: function (res) {
       if (res.data.status) {
         that.setData({
-          stu_rooms: res.data.msg.rooms
+          stu_rooms: res.data.msg
         })
       } 
     },
@@ -220,6 +272,18 @@ Page({
       type: 'success'
     });
   },
+  handleError8M() {
+    $Message({
+      content: '查询不到8M',
+      type: 'error'
+    });
+  },
+  handleError2M() {
+    $Message({
+      content: '查询不到2M',
+      type: 'error'
+    });
+  },
   handleError() {
     $Message({
       content: '错误!!!',
@@ -306,6 +370,8 @@ Page({
           wx.hideLoading();
           return false;
         }else{
+          wx.vibrateShort();
+
           that.setData({
             stu_idcard: res.data.stu_idcard,
             stu_idcard1: res.data.stu_idcard.slice(10, 19),
@@ -355,6 +421,33 @@ Page({
       }
     })
   },
+
+  //安朗
+  offLine(){
+    let that = this;
+    // wx.showLoading({
+    //   title: '稍等中',
+    // })
+    that.handleLoadingT()
+    wx.request({
+      url: 'https://nic.fhyiii.cn/wxcx/public/index/Wechat/offLineUser',
+      method: 'POST',
+      data: {
+        userid: this.data.stu_number
+      },
+      success(res) {
+        if (res.data.data == 1) {
+          that.changeSuccess();
+        } else {
+          that.handleErrorT()
+        }
+      },
+      fail(err) {
+        console.log(err)
+      }
+    })
+  },
+
   //修改为默认密码 8M
   changemima: function () {
     this.handleLoadingT()
@@ -373,13 +466,11 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        if (res.data.reset) {
-          if (res.data.reset == '重置成功') {
-            that.changeSuccess()
-          } else {
-            that.handleErrorT()
-            
-          }
+        if (res.data.success == true) {
+          that.changeSuccess()
+        } else {
+          that.handleErrorT()
+          
         }
       }
     })
@@ -402,12 +493,10 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        if (res.data.reset) {
-          if (res.data.reset == '重置成功') {
-            that.changeSuccess()
-          } else {
-            that.handleErrorT()
-          }
+        if (res.data.success == true) {
+          that.changeSuccess()
+        } else {
+          that.handleErrorT()
         }
       }
     })

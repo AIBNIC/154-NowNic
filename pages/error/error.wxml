@@ -10,9 +10,9 @@
     <image src='https://image.weilanwl.com/gif/wave.gif' mode='scaleToFill' class='gif-black response' style='height:64rpx;mix-blend-mode:screen'></image>
   </view>
   <view class='login-title'>
-     谢谢你的参与
+    谢谢你的参与
   </view>
   <view class='login-title'>
-    ……我们有缘再见！
+    ...我们有缘再见！
   </view>
 </view>

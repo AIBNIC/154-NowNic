@@ -7,6 +7,8 @@ Page({
     Custom: app.globalData.Custom,
     TabCur: 0,
     VerticalNavTop: 0,
+    notice: "", //通知
+    noticecolor: "", //通知
     room: [
       {
         title: 13
@@ -15,10 +17,16 @@ Page({
         title: 14
       },
       {
-        title: 18 + ',' + 19
+        title: 18
       },
       {
-        title: 20 + ',' + 21
+        title: 19
+      },
+      {
+        title: 20
+      },
+      {
+        title: 21
       },
       {
         title: 22
@@ -30,7 +38,10 @@ Page({
         title: 24
       },
       {
-        title: 25 + ',' + 26
+        title: 25
+      },
+      {
+        title: 26
       },
       {
         title: 27
@@ -135,6 +146,7 @@ Page({
   tabSelect(e) {
     // console.log(e);
     // console.log(e.currentTarget.dataset.id)
+    
     var id = e.currentTarget.dataset.id
     var room = this.data.room[id].title
     this.setData({
@@ -167,7 +179,7 @@ Page({
     console.log(this.data.VerticalNavTop);
   },
   onShow(){
-    // console.log(app.globalData)
+    console.log(app.globalData)
     
     var that = this;
     that.setData({
@@ -178,11 +190,21 @@ Page({
       user_floor: that.data.user.floor,
     })
 
-    if (that.data.user.level == 0) {
+    if (!that.data.user.level){
+      wx.redirectTo({
+        url: '../login/login',
+      })
+    } else if(that.data.user.level == 0){
       wx.redirectTo({
         url: '../error/error',
       })
     }
+    
+    // if (that.data.user.level == 0) {
+    //   wx.redirectTo({
+    //     url: '../error/error',
+    //   })
+    // }
 
     console.log(that.data.user_floor)
     console.log(that.data.user)
@@ -193,6 +215,22 @@ Page({
         }
       }
     }
+
+    //公告
+    wx.request({
+      url: 'https://nic.fhyiii.cn/wxcx/public/admin/admin/getNotice',
+      method: 'GET',
+      data: {},
+      success: function (res) {
+        that.setData({
+          notice: res.data.msg,
+          noticecolor: res.data.color
+        })
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    })
   },
   // 判断是双栋还是单栋查询
   judgeSearchFault: function (ds) {
@@ -215,9 +253,9 @@ Page({
       var errorcount = 0;
       // 第一次查询
       wx.request({
-        url: 'https://nic.fhyiii.cn/wxcx/public/index/showFault?floorId=' + ds1,
+        url: "http://127.0.0.1:8080/Wechat/guZhang?"+ds1,
         success: function (res) {
-          // console.log(res)
+          console.log(res.data)
           if (res.data.error) {
             // 报错一次加1
             errorcount++
@@ -230,11 +268,11 @@ Page({
 
           //  第二次查询
           wx.request({
-            url: 'https://nic.fhyiii.cn/wxcx/public/index/showFault?floorId=' + ds2,
+            url: "http://127.0.0.1:8080/Wechat/guZhang?"+ds2,            
             success: function (res) {
-              console.log(res)
+              console.log(res.data)
               if (res.data.error) {
-                errorcount++
+                errorcount++  
                 if (errorcount == 2) {
                   app.errorMessge(res.data.error);
                   that.setData({
@@ -282,7 +320,7 @@ Page({
       }
 
       wx.request({
-        url: 'https://nic.fhyiii.cn/wxcx/public/index/showFault?floorId=' + ds,
+        url: 'http://127.0.0.1:8080/Wechat/SearchGuZhang?' + ds,
         success: function (res) {
 
           if (res.data.error) {
